@@ -3,11 +3,14 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const bodyParser = require('passport');
+const passport = require('passport');
+const User = require('./models/user');
+const session = require('express-session');
 
 const index = require('./routes/index');
 const posts = require('./routes/posts');
 const reviews = require('./routes/reviews');
-
 
 const app = express();
 
@@ -20,6 +23,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  secret: 'hang ten dude',
+  resave: false,
+  saveUninitialized: true
+}));
+
+// CHANGE: USE "createStrategy" INSTEAD OF "authenticate"
+passport.use(User.createStrategy());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use('/', index);
 app.use('/posts', posts);
