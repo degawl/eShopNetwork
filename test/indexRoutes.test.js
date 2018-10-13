@@ -64,3 +64,10 @@ describe('Reset password PUT route', function() {
             .expect(200, done)
     });
 });
+
+describe('Invalid route', function() {
+    it("Assures route testing works", function(done) {
+        request(app).get('/awrongroute')
+            .expect(404, done)
+    });
+});
