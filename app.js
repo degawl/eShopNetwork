@@ -12,6 +12,7 @@ const mongoose = require('mongoose');
 const index = require('./routes/index');
 const posts = require('./routes/posts');
 const reviews = require('./routes/reviews');
+//reikstest
 
 const app = express();
 
