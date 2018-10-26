@@ -1,13 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const { errorHandler } = require('../middleware');
-const { getPosts } = require('../controllers/posts');
+const { getPosts, newPost } = require('../controllers/posts');
 
 router.get('/', errorHandler(getPosts));
 
-router.get('/new', (req, res, next) => {
-  res.send('/posts/new');
-});
+router.get('/new', newPost);
 
 router.post('/', (req, res, next) => {
     res.send('CREATE /posts/');
