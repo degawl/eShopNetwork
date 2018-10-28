@@ -16,7 +16,7 @@ const PostSchema = new Schema({
     reviews: [
         {
             type: Schema.Types.ObjectId,
-            ref: 'Post'
+            ref: 'Review'
         }
     ]
 });

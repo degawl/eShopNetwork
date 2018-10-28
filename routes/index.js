@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { postRegister, postLogin, getLogout } = require('../controllers');
-const { errorHandler } = require('../middleware');
+const { asyncErrorHandler } = require('../middleware');
 
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'eShop Network - Home' });
@@ -11,7 +11,7 @@ router.get('/register', (req, res, next) => {
   res.send('GET /register')
 });
 
-router.post('/register', errorHandler(postRegister));
+router.post('/register', asyncErrorHandler(postRegister));
 
 router.get('/login', (req, res, next) => {
   res.send('GET /login')
