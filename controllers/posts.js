@@ -36,7 +36,7 @@ module.exports = {
 	},
 	async postUpdate(req, res, next) {
 		let post = await Post.findById(req.params.id);
-		if(req.body.deleteImages && req.body.deleteImages.length) {			
+		if(req.body.deleteImages && req.body.deleteImages.length) {	
 			let deleteImages = req.body.deleteImages;
 			for(const public_id of deleteImages) {
 				await cloudinary.v2.uploader.destroy(public_id);
@@ -65,7 +65,11 @@ module.exports = {
 		res.redirect(`/posts/${post.id}`);
 	},
 	async postDestroy(req, res, next) {
-		await Post.findByIdAndRemove(req.params.id);
+		let post = await Post.findById(req.params.id);
+		for(const image of post.images) {
+			await cloudinary.v2.uploader.destroy(image.public_id)
+		}
+		await post.remove();
 		res.redirect('/posts');
 	}
 }
