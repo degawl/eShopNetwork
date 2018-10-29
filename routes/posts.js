@@ -23,7 +23,7 @@ router.get('/:id', asyncErrorHandler(postShow));
 
 router.get('/:id/edit', asyncErrorHandler(postEdit));
 
-router.put('/:id', asyncErrorHandler(postUpdate));
+router.put('/:id', upload.array('images', 4), asyncErrorHandler(postUpdate));
 
 router.delete('/:id', asyncErrorHandler(postDestroy));
 
