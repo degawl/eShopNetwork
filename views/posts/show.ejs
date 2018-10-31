@@ -9,8 +9,8 @@
 		}
   
 	#map {
-		  width: 700px;
-		  height: 400px;
+		  width: 350px;
+		  height: 200px;
 		}
 		.marker {
   background-image: url('/images/mapbox-icon.png');
@@ -52,14 +52,14 @@
 </div>
 
 <script>
-var post = <%- JSON.stringify(post) %>;
+	var post = <%- JSON.stringify(post) %>;
 	mapboxgl.accessToken = 'pk.eyJ1IjoiaXNhYmVscCIsImEiOiJjam51ZThrY2swNDhoM3FwbjVrbGs1cTIyIn0.PlK_KWvmHiCv3PKJgiruzw';
 	
 	var map = new mapboxgl.Map({
 	  container: 'map',
 	  style: 'mapbox://styles/mapbox/light-v9',
 	  center: post.coordinates,
-	  zoom: 3
+	  zoom: 5
 	});
 
 // create a HTML element for our post location/marker
