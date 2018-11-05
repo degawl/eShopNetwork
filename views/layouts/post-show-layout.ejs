@@ -10,7 +10,8 @@
   </head>
   <body>
         <% include ../partials/navbar %>
-    <%- body -%>
+        <% include ../partials/flash-messages %>
+        <%- body -%>
         <script>
                 var post = <%- JSON.stringify(post) %>;
                 </script>

@@ -33,9 +33,12 @@ module.exports = {
 		  .send();
 		  req.body.post.coordinates = response.body.features[0].geometry.coordinates;
 		let post = await Post.create(req.body.post);
+		req.session.success = 'Post created successfully!!';
+
 		res.redirect(`/posts/${post.id}`);
 	},
 	async postShow(req, res, next) {
+		throw new Error('ERRROOOOOOOR!');
 		let post = await Post.findById(req.params.id);
 		res.render('posts/show', { post });
 	},
