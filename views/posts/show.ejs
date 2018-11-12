@@ -22,7 +22,7 @@
 
 <h2>Create a Review</h2>
 <form action="/posts/<%= post.id %>/reviews" method="POST">
-<textarea name="review[body]"></textarea>
+<textarea name="review[body]" required></textarea>
 <input type="number" name="review[rating]" min="1" max="5" step="1" required>
 
 <input type="submit">
@@ -37,8 +37,9 @@
 	</div>
 	<div>
 		<button class="toggle-edit-form">Edit</button>
-		<form action="/posts/<%= post.id %>/reviews/<%= review.id%>?_method="PUT" 
-			method="POST" class="edit_review_form">
+
+		<form action="/posts/<%= post.id %>/reviews/<%= review.id%>?_method=PUT" 
+			method="POST" class="edit-review-form">
 				<textarea name="review[body]" required><%= review.body%></textarea>
 				<input type="number" name="review[rating]" min="1" max="5" 
 				step="1" value="<%=review.rating %> "required>
@@ -48,3 +49,12 @@
 	</div>
 	<hr>
 <% }); %>
+
+<script>
+	$('.toggle-edit-form').on('click', function(){
+		//toggle the edit button text on click
+		$(this).text() === 'Edit' ? $(this).text('Cancel') : $(this).text('Edit');
+		//toggle visibility of the edit review form
+		$(this).siblings('.edit-review-form').toggle();
+	});
+</script>
