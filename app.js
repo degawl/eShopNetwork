@@ -19,7 +19,7 @@ const reviews = require('./routes/reviews');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/eshop-network-mapbox', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/eshop-network', { useNewUrlParser: true });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
