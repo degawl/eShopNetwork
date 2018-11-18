@@ -72,6 +72,8 @@
 				
 				<input type="submit" value="Update">
 		</form>
+<script>$('#edit-rate<%= review.rating %>').prop('checked', true)</script>
+
 		<form action="/posts/<%= post.id %>/reviews/<%= review.id%>?_method=DELETE" method="POST">
 		<input type="submit" value="Delete">
 		</form>
