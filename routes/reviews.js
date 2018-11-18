@@ -9,9 +9,7 @@ const{
 
 router.post('/', asyncErrorHandler(reviewCreate));
 
-router.put('/:review_id', (req, res, next) => {
-    res.send('UPDATE /posts/:id/reviews/:review_id');
-});
+router.put('/:review_id', asyncErrorHandler(reviewUpdate));
 router.delete('/:review_id', (req, res, next) => {
     res.send('DELETE /posts/:id/reviews/:review_id');
 });

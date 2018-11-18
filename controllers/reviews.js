@@ -17,7 +17,9 @@ module.exports = {
         res.redirect(`/posts/${post.id}`); 
 	},
 	async reviewUpdate(req, res, next) {
-		
+        await Review.findByIdAndUpdate(req.params.review_id, req.body.review);
+        req.session.success = 'Review updated successfully';
+         res.redirect(`/posts/${req.params.id}`);       
 	},
 	async reviewDestroy(req, res, next) {
 		
