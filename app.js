@@ -19,7 +19,7 @@ const reviews = require('./routes/reviews');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/eshop-network-mapbox', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/eshop-network', { useNewUrlParser: true });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -56,6 +56,11 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next) {
+  req.user = {
+    '_id' : '5be962214d767427d7a508f5',
+    'username' : 'isabel'
+  }
+  res.locals.currentUser = req.user;
   res.locals.title = 'e-Shop Network'
   res.locals.success = req.session.success ||'';
   delete req.session.success;
