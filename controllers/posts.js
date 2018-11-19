@@ -1,103 +1,147 @@
 const Post = require('../models/post');
-const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
-const geocodingClient = mbxGeocoding({accessToken: process.env.MAPBOX_TOKEN});
-const cloudinary = require('cloudinary');
-cloudinary.config({
-	cloud_name: 'drxxvydxk',
-	api_key: '628556163771961',
-	api_secret: process.env.CLOUDINARY_SECRET
-});
+const paginate = require('express-paginate');
+const geocoder = require('../config/geocoder');
+const { cloudinary } = require('../config/cloudinary');
 
 module.exports = {
-	async postIndex(req, res, next) {
-		let posts = await Post.find({});
-		res.render('posts/index', { posts, title: 'Posts Index' });
-	},
-	postNew(req, res, next) {
-		res.render('posts/new');
-	},
-	async postCreate(req, res, next) {
-		req.body.post.images = [];
-		for(const file of req.files) {
-			let image = await cloudinary.v2.uploader.upload(file.path);
-			req.body.post.images.push({
-				url: image.secure_url,
-				public_id: image.public_id
-			});
-		}
-		let response = await geocodingClient
-  			.forwardGeocode({
-    		query: req.body.post.location,
-    		limit: 1
-  		})
-		  .send();
-		  req.body.post.coordinates = response.body.features[0].geometry.coordinates;
-		let post = await Post.create(req.body.post);
-		req.session.success = 'Post created successfully!!';
-
-		res.redirect(`/posts/${post.id}`);
-	},
-	async postShow(req, res, next) {
-		let post = await Post.findById(req.params.id).populate({
-			path: 'reviews',
-		options: {sort: {'_id': -1}},
-	populate:{
-		path: 'author',
-		model: 'User'
-	}});
-		res.render('posts/show', { post });
-	},
-	async postEdit(req, res, next) {
-		let post = await Post.findById(req.params.id);
-		res.render('posts/edit', { post });
-	},
-	async postUpdate(req, res, next) {
-		let post = await Post.findById(req.params.id);
-		if(req.body.deleteImages && req.body.deleteImages.length) {	
-			let deleteImages = req.body.deleteImages;
-			for(const public_id of deleteImages) {
-				await cloudinary.v2.uploader.destroy(public_id);
-				for(const image of post.images) {
-					if(image.public_id === public_id) {
-						let index = post.images.indexOf(image);
-						post.images.splice(index, 1);
-					}
+	index: async (req, res, next) => {
+		let posts, filters, query;
+		const escapeRegex = (text) => {
+		    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+		};
+		// check if filters exist
+		if (req.query.post) filters = Object.values(req.query.post).join('') ? true : false;
+		// check if request has filter(s)
+		if (filters) {
+				let { search, condition, category, price, location, longitude, latitude  } = req.query.post;
+				// build $and query array
+				query = [];
+				if (search) {
+					search = new RegExp(escapeRegex(search), 'gi');
+					query.push({ $or: [
+						{ title: search },
+						{ description: search },
+						{ location: search },
+						{ condition: search },
+						{ category: search }
+					]});
 				}
-			}
+				if (condition) {
+					if (Array.isArray(condition)) condition = '(' + condition.join('?|') + '?)';
+					query.push({ condition: new RegExp(condition, 'gi') });
+				}
+				if (category) {
+					res.locals.category = category; // make category available in view
+					if (Array.isArray(category)) category = '(' + category.join('?|') + '?)';
+					query.push({ category: new RegExp(category, 'gi') });
+				}
+				if (price) {
+					if (price.min) query.push({ price: { $gte: price.min } });
+					if (price.max) query.push({ price: { $lte: price.max } });
+				}
+				if (longitude && latitude) {
+					// get the max distance or set it to 25 mi
+					let maxDistance = req.query.post.distance || 25;
+					// we need to convert the distance to degrees, one degree is approximately 69 miles
+					maxDistance /= 69;
+					// get coordinates [ <longitude> , <latitude> ]
+					let coords = [
+						longitude,
+						latitude
+					];
+					query.push({ 
+			    	coordinates: {
+			      	$near: coords,
+			      	$maxDistance: maxDistance
+			    	} 
+			    });
+				}
+				query = query.length ? { $and: query } : {};
 		}
-		if(req.files) {
-			for(const file of req.files) {
-				let image = await cloudinary.v2.uploader.upload(file.path);
-				post.images.push({
-					url: image.secure_url,
-					public_id: image.public_id
+
+		posts = await Post.paginate(query, { page: req.query.page, limit: req.query.limit, sort: { '_id': -1 } });
+
+		if(req.xhr) {
+				// send back json with status of 200 (OK)
+				res.status(200).json({
+					posts: posts.docs,
+					pageNumber: posts.page, 
+					has_next: paginate.hasNextPages(req)(posts.pages),
+					has_prev: req.query.page > 1,
+					pages: paginate.getArrayPages(req)(3, posts.pages, req.query.page),
+					nextUrl: paginate.href(req)(),
+					prevUrl: paginate.href(req)(true)
 				});
-			}
+		} else {		
+				// render index view
+			  res.render('posts/index', { 
+					title: 'Posts Index', 
+					page: 'posts', 
+					posts: posts.docs,
+					pageNumber: posts.page, 
+					pageCount: posts.pages,
+			    itemCount: posts.limit,
+			    pages: paginate.getArrayPages(req)(3, posts.pages, req.query.page),
+			    error: posts.total ? '' : 'No results available for that search'
+			  });
 		}
-		//check if location was updated
-		if(req.body.post.location !== post.location){
-		let response = await geocodingClient
-  			.forwardGeocode({
-    		query: req.body.post.location,
-    		limit: 1
-  		})
-		  .send();
-		  post.coordinates = response.body.features[0].geometry.coordinates;
-		  post.location = req.body.post.location;
-		}
-		post.title = req.body.post.title;
-		post.description = req.body.post.description;
-		post.price = req.body.post.price;
-		post.save();
-		res.redirect(`/posts/${post.id}`);
 	},
-	async postDestroy(req, res, next) {
-		let post = await Post.findById(req.params.id);
-		for(const image of post.images) {
-			await cloudinary.v2.uploader.destroy(image.public_id)
+	newPost: (req, res, next) => {
+  	res.render('posts/new', { title: 'New Post', page: 'new-post' });
+	},
+	create: async (req, res, next) => {
+		if(!req.file) {
+			req.flash('error', 'Please upload an image.');
+			return res.redirect('/posts/new');
 		}
-		await post.remove();
-		req.session.success = 'Post deleted successfully!';
-		res.redirect('/posts');
+		let result = await cloudinary.uploader.upload(req.file.path);
+		let geoLocation = await geocoder.geocode(req.body.post.location);
+	    req.body.post.coordinates = [geoLocation[0].longitude, geoLocation[0].latitude];
+		req.body.post.author = req.user._id;
+		req.body.post.image = result.secure_url;
+		let post = await Post.create(req.body.post);
+		req.flash('success', 'Post created successfully!');
+	  res.redirect(`/posts/${post.id}`);
+	},
+	show: (req, res, next) => {
+		Post.findById(req.params.id).populate(
+			{
+			  path: 'comments',
+			  model: 'Comment',
+			  populate: {
+			    path: 'author',
+			    model: 'User'
+			  }
+			}).exec(function(err, post) {
+			if(err) {
+				req.flash('error', err.message);
+				return res.redirect('/posts');
+			}
+		  res.render('posts/show', { title: post.title , page: 'show-post', post: post });
+		});
+	},
+	edit: (req, res) => {
+		let post = req.post;
+	  res.render('posts/edit', { title: post.title , page: 'edit-post', post: post });
+	},
+	update: async (req, res, next) => {
+		if(req.file) {
+				cloudinary.uploader.upload(req.file.path, async (result) => { 
+					req.body.post.image = result.secure_url;
+					let post = await Post.findByIdAndUpdate(req.params.id, req.body.post);
+					req.flash('success', 'Post successfully updated.');
+					res.redirect(`/posts/${post.id}`);
+				});
+		} else {
+				let post = await Post.findByIdAndUpdate(req.params.id, req.body.post);
+				req.flash('success', 'Post successfully updated.');
+				res.redirect(`/posts/${post.id}`);
+		}
+	},
+	destroy: (req, res) => {
+		post = req.post;
+		post.remove();
+		req.flash('success', 'Post successfully deleted.');
+	  res.redirect('/posts');
 	}
-}
+};
