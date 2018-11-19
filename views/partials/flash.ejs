@@ -1,7 +1,9 @@
-<% if(success && success.length) { %>
-    <h1 style="color: purple;"><%= success %></h1>
-    <% } %> 
-
-    <% if(error && error.length) { %>
-        <h1 style="color: red;"><%= error %></h1>
-        <% } %> 
+<div class="container" id="flash-message">
+   <% if(error && error.length > 0) { %>
+     <div class="alert alert-danger" role="alert"><%= error %></div>
+   <% } %>
+   
+   <% if(success && success.length > 0) { %>
+     <div class="alert alert-success" role="alert"><%= success %></div>
+   <% } %>
+</div>

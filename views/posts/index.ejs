@@ -1,12 +1,161 @@
 <% layout('layouts/boilerplate') -%>
-<h1>Posts Index!</h1>
 
-<% posts.forEach(function(post) { %>
-	<div>
-		<h2><%= post.title %></h2>
-		<div>Price: <%= post.price %></div>
-		<div><%= post.description %></div>
-		<div><%= post.location %></div>
-		<div><a href="/posts/<%= post.id %>">View More</a></div>
-	</div>
-<% }); %>
+<div class="row">
+
+  <div class="col-lg-3">
+    <h3>Filter By:</h3>
+    <form action="/posts" method="GET" id="post-filter-form">
+    	<fieldset>
+    		<legend id="condition-legend">Condition</legend>
+    		<div class="form-check form-check-inline">
+    		  <label class="form-check-label">
+    		    <input class="form-check-input" type="checkbox" value="excellent" name="post[condition]" checked> Excellent
+    		  </label>
+    		</div>
+    		<div class="form-check form-check-inline">
+    		  <label class="form-check-label">
+    		    <input class="form-check-input" type="checkbox" value="good" name="post[condition]" checked> Good
+    		  </label>
+    		</div>
+    		<div class="form-check form-check-inline">
+    		  <label class="form-check-label">
+    		    <input class="form-check-input" type="checkbox" value="poor" name="post[condition]" checked> Poor
+    		  </label>
+    		</div>
+    	</fieldset>
+    	<fieldset>
+    		<legend id="category-legend">Category</legend>
+    		<div class="form-check form-check-inline">
+    		  <label class="form-check-label">
+    		    <input class="form-check-input" type="checkbox" value="short" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('short') ? 'checked' : '' %>> Short
+    		  </label>
+    		</div>
+    		<div class="form-check form-check-inline">
+    		  <label class="form-check-label">
+    		    <input class="form-check-input" type="checkbox" value="long" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('long') ? 'checked' : '' %>> Long
+    		  </label>
+    		</div>
+    		<div class="form-check form-check-inline">
+    		  <label class="form-check-label">
+    		    <input class="form-check-input" type="checkbox" value="fish" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('fish') ? 'checked' : '' %>> Fish
+    		  </label>
+    		</div>
+    		<div class="form-check form-check-inline">
+    		  <label class="form-check-label">
+    		    <input class="form-check-input" type="checkbox" value="gun" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('gun') ? 'checked' : '' %>> Gun
+    		  </label>
+    		</div>
+    		<div class="form-check form-check-inline">
+    		  <label class="form-check-label">
+    		    <input class="form-check-input" type="checkbox" value="foam" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('foam') ? 'checked' : '' %>> Foam
+    		  </label>
+    		</div>
+    	</fieldset>
+    	<div class="form-group">
+    		<p>Price</p>
+    		<div class="row">
+	    			<div class="col-md-6">
+	    				<label for="min" class="sr-only">Min</label>
+	    				<input type="number" class="form-control" id="min" name="post[price][min]" min="0" max="10000" step="1" placeholder="Min">
+	    			</div>
+	    			<div class="col-md-6">
+	    				<label for="max" class="sr-only">Max</label>
+	    				<input type="number" class="form-control" id="max" name="post[price][max]" min="0" max="10000" step="1" step="1" placeholder="Max">
+	    			</div>
+	    	</div>
+	    </div>
+    	<div class="form-group">
+	    	<label for="input-location">Location</label> <small class="float-right"><i class="fa fa-location-arrow" aria-hidden="true"></i> <a href="#" id="use-my-location">use my location</a></small>
+	    	<input type="text" class="form-control" id="input-location" name="post[location]" placeholder="Address or Zipcode">
+	    </div>
+    	<div class="form-group" id="distance">
+	  		<p>Distance (miles)</p>
+	    	<div class="form-check form-check-inline">
+	    	  <label class="form-check-label">
+	    	    <input class="form-check-input" type="radio" name="post[distance]" id="distance1" value="25"> 25
+	    	  </label>
+	    	</div>
+	    	<div class="form-check form-check-inline">
+	    	  <label class="form-check-label">
+	    	    <input class="form-check-input" type="radio" name="post[distance]" id="distance2" value="50"> 50
+	    	  </label>
+	    	</div>
+	    	<div class="form-check form-check-inline">
+	    	  <label class="form-check-label">
+	    	    <input class="form-check-input" type="radio" name="post[distance]" id="distance3" value="100"> 100
+	    	  </label>
+	    	</div>
+	    </div>
+
+    	<input type="submit" class="btn btn-outline-primary btn-block mb-3" role="button" value="Go!">
+    </form>
+
+  </div> 
+  <!-- /.col-lg-3 -->
+	
+	<div class="col-lg-9">
+		<div id="index-map" class="mb-4 rounded">
+		</div>
+    <div id="loader"></div>
+
+		<div class="row" id="posts-row">
+			<% posts.forEach((post) => { %>
+			<div class="col-lg-4 col-md-6 mb-4">
+			  <div class="card h-100">
+			    <a href="/posts/<%= post.id %>"><img class="card-img-top" src="<%= post.image %>" alt="<%= post.title %>"></a>
+			    <div class="card-body">
+			      <h4 class="card-title">
+			        <a href="/posts/<%= post.id %>"><%= post.title %></a>
+			      </h4>
+			      <h5>$<%= post.price %>.00</h5>
+			      <p class="card-text"><%- post.description.substring(0, 20) %><%= post.description.length > 20 ? '...' : '' %></p>
+			      <a href="/posts/<%= post.id %>" class="btn btn-outline-primary">View Board</a>
+			    </div>
+			    <div class="card-footer">
+			      <small class="text-muted float-left"><%= post.category %></small>
+			      <small class="text-muted float-right"><%= post.condition %></small>
+			    </div>
+			  </div>
+			</div>
+			<% }); %>
+		</div>
+		<% if (paginate.hasPreviousPages || paginate.hasNextPages(pageCount)) { %>
+		<div class="row justify-content-center">
+			<div class="col-4">		
+				<nav aria-label="Page navigation">
+					<ul class="pagination justify-content-center">
+						<% if (paginate.hasPreviousPages) { %>
+						<li class="page-item">
+							<a href="<%= paginate.href(true) %>" class="page-link" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<% } %>
+						<% if (pages) { %>
+						<% pages.forEach(function(page) { %>
+						<li class="page-item <% if(page.number === pageNumber) { %>active<% } %>"><a href="<%= page.url %>" class="page-link"><%= page.number %></a></li>
+						<% }); %>
+						<% } %>
+						<% if (paginate.hasNextPages(pageCount)) { %>
+						<li class="page-item">
+							<a href="<%= paginate.href() %>" class="page-link" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+						<% } %>
+					</ul>
+				</nav>
+			</div>
+			<!-- /.col-3 -->
+		</div>
+		<!-- /.row -->
+		<% } %>
+  </div>
+  <!-- /.col-lg-9 -->
+
+</div>
+<!-- /.row -->
+
+<script>
+	var posts = <%- JSON.stringify(posts) %>;
+</script>

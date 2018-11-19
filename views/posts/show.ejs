@@ -1,86 +1,83 @@
-<% layout('layouts/post-show-layout') -%>
-<h1><%= post.title %></h1>
-<div>Price: <%= post.price %></div>
-<div><%= post.description %></div>
-<div><%= post.location %></div>
-<div>
-	<% post.images.forEach(function(image) { %>
-	<img src="<%= image.url %>" alt="Surf board image" width="200px">
-	<% }); %>
+<% layout('layouts/boilerplate') -%>
+
+<div class="row">
+
+  <div class="col-lg-3">
+    <h1 class="mt-4 mb-0"><%= post.title %></h1>
+    <small><%= post.category %></small>
+    <hr>
+    <div class="card">
+      <div class="card-body">
+				<h3>$<%= post.price %>.00</h3>
+				<p><%= post.location %></p>
+      </div>
+			<div id="show-map"></div>
+    </div>
+  </div>
+  <!-- /.col-lg-3 -->
+
+  <div class="col-lg-9">
+
+    <div class="card mt-4">
+      <img class="card-img-top img-fluid" src="<%= post.image %>" alt="<%= post.title %>">
+      <div class="card-body">
+        <p>Posted by: <%= post.author.local.username || post.author.facebook.name %> <%= moment(post.createdAt).fromNow() %></p>
+        <hr>
+        <p class="card-text"><%- post.description %></p>
+        <% if(currentUser && currentUser.equals(post.author)) { %>
+        <a class="btn btn-outline-warning" href="/posts/<%= post.id %>/edit" role="button">Edit</a>
+        <form action="/posts/<%= post.id %>?_method=DELETE" method="POST" class="delete-form">
+        	<input type="submit" class="btn btn-outline-danger" value="Delete">
+        </form>
+        <% } %>
+      </div>
+    </div>
+    <!-- /.card -->
+
+    <div class="card card-outline-secondary my-4">
+      <div class="card-header">
+        Questions & Comments
+      </div>
+      <div class="card-body" id="comments">
+      	<% post.comments.forEach(function(comment) { %>
+        <div class="row">
+          <div class="col-md-8">
+            <p><%- comment.body %></p>
+            <small class="text-muted">Posted by <%= comment.author.local.username || comment.author.facebook.name %> <%= moment(comment.createdAt).fromNow() %></small>
+          </div>
+          <div class="col-md-4">
+            <div class="float-md-right mt-2 mt-md-0">
+              <% if (currentUser && comment.author.equals(currentUser.id)) { %>
+              <button class="btn btn-sm btn-outline-warning edit-comment" data-comment-id="<%= comment.id %>">Edit</button>
+              <form action="/posts/<%= post.id %>/comments/<%= comment.id %>" class="delete-comment">
+                <input type="submit" class="btn btn-sm btn-outline-danger" value="Delete">
+              </form>
+              <% } %>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <hr>
+          </div>
+        </div>
+      	<% }); %>
+        <% if (currentUser) { %>
+        <form action="/posts/<%= post.id %>/comments" class="mt-2" id="comment-form">
+        	<div class="form-group">
+        	  <label for="comment-body" class="sr-only">Body</label>
+        	  <textarea class="form-control" id="comment-body" rows="3" name="comment[body]" placeholder="Tell us how you feel..."></textarea>
+        	</div>
+        	<button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <% } %>
+      </div>
+    </div>
+    <!-- /.card -->
+
+  </div>
+  <!-- /.col-lg-9 -->
+
 </div>
-<div id='map'></div>
-<div>
-	<a href="/posts/<%= post.id %>/edit">
-		<button>Edit</button>
-	</a>
-</div>
-<div>
-	<form action="/posts/<%= post.id %>?_method=DELETE" method="POST">
-		<input type="submit" value="Delete">
-	</form>
-</div>
 
-<h2>Create a Review</h2>
-<form action="/posts/<%= post.id %>/reviews" method="POST">
-<textarea name="review[body]" required></textarea>
-<fieldset class="starability-basic">
-	<legend>Rating:</legend>
-	<button class="clear-rating" type="button">Clear Rating</button>
-	<input type="radio" id="rate0" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
-	<input type="radio" id="rate1" name="review[rating]" value="1" />
-	<label for="rate1" title="Terrible">1 star</label>
-	<input type="radio" id="rate2" name="review[rating]" value="2" />
-	<label for="rate2" title="Not good">2 stars</label>
-	<input type="radio" id="rate3" name="review[rating]" value="3" />
-	<label for="rate3" title="Average">3 stars</label>
-	<input type="radio" id="rate4" name="review[rating]" value="4" />
-	<label for="rate4" title="Very good">4 stars</label>
-	<input type="radio" id="rate5" name="review[rating]" value="5" />
-	<label for="rate5" title="Amazing">5 stars</label>
-  </fieldset>
-
-<input type="submit">
-</form>
-<h3>Reviews</h3>
-<!-- display all reviews-->
-<% post.reviews.forEach(function(review){%>
-	<div>
-		Author: <%= review.author.username %><br>
-	<%= review.body %><br>
-	Rating: <%= review.rating %>
-	</div>
-	<% if(review.author.equals(currentUser._id)) { %>
-	<div>
-		<button class="toggle-edit-form">Edit</button>
-
-		<form action="/posts/<%= post.id %>/reviews/<%= review.id%>?_method=PUT" 
-			method="POST" class="edit-review-form">
-				<textarea name="review[body]" required><%= review.body%></textarea>
-				<fieldset class="starability-basic">
-					<legend>Rating:</legend>
-					<button class="clear-rating" type="button">Clear Rating</button>
-					<input type="radio" id="edit-rate0" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
-					<input type="radio" id="edit-rate1" name="review[rating]" value="1" />
-					<label for="edit-rate1" title="Terrible">1 star</label>
-					<input type="radio" id="edit-rate2" name="review[rating]" value="2" />
-					<label for="edit-rate2" title="Not good">2 stars</label>
-					<input type="radio" id="edit-rate3" name="review[rating]" value="3" />
-					<label for="edit-rate3" title="Average">3 stars</label>
-					<input type="radio" id="edit-rate4" name="review[rating]" value="4" />
-					<label for="edit-rate4" title="Very good">4 stars</label>
-					<input type="radio" id="edit-rate5" name="review[rating]" value="5" />
-					<label for="edit-rate5" title="Amazing">5 stars</label>
-				  </fieldset>
-				
-				<input type="submit" value="Update">
-		</form>
-<script>$('#edit-rate<%= review.rating %>').prop('checked', true)</script>
-
-		<form action="/posts/<%= post.id %>/reviews/<%= review.id%>?_method=DELETE" method="POST">
-		<input type="submit" value="Delete">
-		</form>
-	</div>
-	<% }; %>
-	<hr>
-	<% }); %>
-
+<script>
+  var post = <%- JSON.stringify(post) %>;
+</script>
