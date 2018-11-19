@@ -1,4 +1,4 @@
-const passport = require('passport');
+/* const passport = require('passport');
 const User = require('../models/user');
 
 module.exports = {
@@ -21,4 +21,4 @@ module.exports = {
             req.logout();
             res.redirect('/');
     }
-}
+} */
