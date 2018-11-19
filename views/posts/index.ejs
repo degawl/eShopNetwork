@@ -106,9 +106,9 @@
 			      <h4 class="card-title">
 			        <a href="/posts/<%= post.id %>"><%= post.title %></a>
 			      </h4>
-			      <h5>$<%= post.price %>.00</h5>
+			      <h5>€<%= post.price %>.00</h5>
 			      <p class="card-text"><%- post.description.substring(0, 20) %><%= post.description.length > 20 ? '...' : '' %></p>
-			      <a href="/posts/<%= post.id %>" class="btn btn-outline-primary">View Board</a>
+			      <a href="/posts/<%= post.id %>" class="btn btn-outline-primary">View Post</a>
 			    </div>
 			    <div class="card-footer">
 			      <small class="text-muted float-left"><%= post.category %></small>

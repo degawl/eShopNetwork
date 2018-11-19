@@ -67,6 +67,13 @@ body {
     animation: spin 2s linear infinite;
 }
 
+.navbar {
+  -webkit-box-shadow: 0 4px 6px -6px #999;
+  -moz-box-shadow: 0 8px 6px -6px #999;
+  box-shadow: 0 8px 12px -6px rgb(109, 108, 108);
+
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
