@@ -1,30 +1,37 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Review = require('./review');
 
 const PostSchema = new Schema({
 	title: String,
-	price: String,
 	description: String,
-	images: [ { url: String, public_id: String } ],
+	price: Number,
+	condition: String,
 	location: String,
-	coordinates: Array,
-	author: {
-		type: Schema.Types.ObjectId,
-		ref: 'User'
+	category: String,
+	coordinates: {
+		type: [Number],  // [<longitude>, <latitude>]
+		index: '2d'      // create the geospatial index
 	},
-	reviews: [
+	image: String,
+	comments: [
 		{
-			type: Schema.Types.ObjectId,
-			ref: 'Review'
+		   type: mongoose.Schema.Types.ObjectId,
+		   ref: "Comment"
 		}
-	]
+	],
+	author: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "User"
+	},
+	createdAt: { type: Date, default: Date.now }
 });
-PostSchema.pre('remove', async function () {
-	await Review.remove({
-		_id:{
-			$in: this.reviews
-		}
-	});
+
+// pre-hook middleware to populate author in post show route
+PostSchema.pre('findOne', function(next) {
+  this.populate('author');
+  next();
 });
+
+PostSchema.plugin(require('mongoose-paginate'));
+
 module.exports = mongoose.model('Post', PostSchema);
