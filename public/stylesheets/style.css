@@ -1,8 +1,73 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+html {
+  position: relative;
+  min-height: 100%;
 }
 
-a {
-  color: #00B7FF;
+/* Move down content because we have a fixed navbar that is 3.5rem tall */
+body {
+	padding-top: 4.5rem;
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+/* Hide distance options in filter form */
+#distance {
+  display: none;
+}
+
+/* Make delete forms inline-block */
+.delete-form {
+	display: inline-block;
+}
+
+/* Google Map styles */
+#index-map, #show-map {
+	height: 300px;
+	width: 100%;
+}
+
+/* Sticky Footer*/
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
+
+/* Fieldset legend font-size */
+#condition-legend, #category-legend {
+	font-size: 1rem;
+}
+
+/* Delete Comment Form */
+.delete-comment {
+  display: inline-block;
+}
+
+/* Style form validation messages */
+.form-validation {
+  color: red;
+}
+
+/* Map loader animation */
+#loader {
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    top: 110px;
+    left: 45%;
+    border: 12px solid #f3f3f3; /* Light grey */
+    border-top: 12px solid #F75047; /* Red */
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
