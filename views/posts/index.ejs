@@ -1,7 +1,6 @@
 <% layout('layouts/boilerplate') -%>
 
 <div class="row">
-
   <div class="col-lg-3">
     <h3>Filter By:</h3>
     <form action="/posts" method="GET" id="post-filter-form">
@@ -27,27 +26,27 @@
     		<legend id="category-legend">Category</legend>
     		<div class="form-check form-check-inline">
     		  <label class="form-check-label">
-    		    <input class="form-check-input" type="checkbox" value="short" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('short') ? 'checked' : '' %>> Short
+    		    <input class="form-check-input" type="checkbox" value="short" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Electronics') ? 'checked' : '' %>> Electronics
     		  </label>
     		</div>
     		<div class="form-check form-check-inline">
     		  <label class="form-check-label">
-    		    <input class="form-check-input" type="checkbox" value="long" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('long') ? 'checked' : '' %>> Long
+    		    <input class="form-check-input" type="checkbox" value="long" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Fashion') ? 'checked' : '' %>> Fashion
     		  </label>
     		</div>
     		<div class="form-check form-check-inline">
     		  <label class="form-check-label">
-    		    <input class="form-check-input" type="checkbox" value="fish" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('fish') ? 'checked' : '' %>> Fish
+    		    <input class="form-check-input" type="checkbox" value="fish" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Health') ? 'checked' : '' %>> Health
     		  </label>
     		</div>
     		<div class="form-check form-check-inline">
     		  <label class="form-check-label">
-    		    <input class="form-check-input" type="checkbox" value="gun" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('gun') ? 'checked' : '' %>> Gun
+    		    <input class="form-check-input" type="checkbox" value="gun" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Entertainment') ? 'checked' : '' %>> Entertainment
     		  </label>
     		</div>
     		<div class="form-check form-check-inline">
     		  <label class="form-check-label">
-    		    <input class="form-check-input" type="checkbox" value="foam" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('foam') ? 'checked' : '' %>> Foam
+    		    <input class="form-check-input" type="checkbox" value="foam" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Miscellaneous') ? 'checked' : '' %>> Miscellaneous
     		  </label>
     		</div>
     	</fieldset>

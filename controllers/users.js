@@ -10,7 +10,7 @@ passportConfig(passport);
 module.exports = {
 	index: async (req, res, next) => {
 		let posts = await Post.find({}).sort({'_id': 1}).limit(4);
-	  res.render('index', { title: 'Board Maps', page: 'home', posts: posts });
+	  res.render('index', { title: 'eShopNetwork', page: 'home', posts: posts });
 	},
 	getSignup: (req, res) => {
 	  res.render('users/signup', {title: 'User Sign-up', page: 'signup', username: '', email: ''});
@@ -151,9 +151,9 @@ module.exports = {
 	    },
 	    (token, user, done) => {
 	      let data = {
-	        from: 'learntocodeinfo@gmail.com',
+	        from: 'eshopnetwork@gmail.com',
 	        to: user.local.email,
-	        subject: `Craig's Boards - Password Reset`,
+	        subject: `eShop Network - Password Reset`,
 	        html: `
 	          <p>You are receiving this because you (or someone else) have requested the reset of the password for your account.</p>
 	          <p>Please click on the following <a href="http://${req.headers.host}/reset/${token}">link</a>, or paste this into your browser to complete the process:</p>
@@ -205,9 +205,9 @@ module.exports = {
 	    },
 	    (user, done) => {
 	      let data = {
-	        from: 'learntocodeinfo@gmail.com',
+	        from: 'eshopnetwork@gmail.com',
 	        to: user.local.email,
-	        subject: 'Craig\'s Boards - Password Reset',
+	        subject: 'eShopNetwork - Password Reset',
 	        html: `
 	          <h4>Hello ${user.local.username},</h4>
 	          <p>This is a confirmation that the password for your account ${user.local.email} has just been changed.</p>
