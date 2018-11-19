@@ -1,48 +1,65 @@
 const express = require('express');
 const router = express.Router();
-const { postRegister, postLogin, getLogout } = require('../controllers');
-const { asyncErrorHandler } = require('../middleware');
+const middleware = require('../middleware');
+const { asyncMiddleware, isLoggedIn } = middleware;
+const {
+  index,
+  getSignup, 
+  postSignup, 
+  getLogin, 
+  postLogin, 
+  getProfile, 
+  logout, 
+  update, 
+  getFbAuth, 
+  getFbAuthCb, 
+  getConnectLocal,
+  postConnectLocal,
+  connectFbCb,
+  unlinkLocal,
+  unlinkFb,
+  getForgot,
+  postForgot,
+  getResetToken,
+  postResetToken
+} = require('../controllers/users');
 
-router.get('/', (req, res, next) => {
-  res.render('index', { title: 'eShop Network - Home' });
-});
+router.get('/', asyncMiddleware(index));
 
-router.get('/register', (req, res, next) => {
-  res.send('GET /register');
-});
+router.get('/signup', getSignup);
 
-router.post('/register', asyncErrorHandler(postRegister));
+router.post('/signup', postSignup);
 
-router.get('/login', (req, res, next) => {
-  res.send('GET /login');
-});
+router.get('/login', getLogin);
 
 router.post('/login', postLogin);
 
-router.get('/logout', getLogout);
+router.get('/profile', isLoggedIn, getProfile);
 
-router.get('/profile', (req, res, next) => {
-  res.send('GET /profile');
-});
+router.get('/logout', logout);
 
-router.put('/profile/:user_id', (req, res, next) => {
-  res.send('PUT /profile/:user_id  ');
-});
+router.put('/users', update);
 
-router.get('/forgot', (req, res, next) => {
-  res.send('GET /forgot');
-});
+router.get('/auth/facebook/:action', getFbAuth);
 
-router.put('/forgot', (req, res, next) => {
-  res.send('PUT /forgot');
-});
+router.get('/auth/facebook/callback/login', getFbAuthCb);
 
-router.get('/reset/:token', (req, res, next) => {
-  res.send('GET /reset/:token');
-});
+router.get('/connect/local', isLoggedIn, getConnectLocal);
 
-router.put('/reset/:token', (req, res, next) => {
-  res.send('PUT /reset/:token');
-});
+router.post('/connect/local', postConnectLocal);
+
+router.get('/auth/facebook/callback/connect', isLoggedIn, connectFbCb);
+
+router.get('/unlink/local', isLoggedIn, asyncMiddleware(unlinkLocal));
+
+router.get('/unlink/facebook', isLoggedIn, asyncMiddleware(unlinkFb));
+
+router.get('/forgot', getForgot);
+
+router.post('/forgot', postForgot);
+
+router.get('/reset/:token', getResetToken);
+
+router.post('/reset/:token', postResetToken);
 
 module.exports = router;

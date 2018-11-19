@@ -1,31 +1,33 @@
 const express = require('express');
 const router = express.Router();
-const multer = require('multer');
-const upload = multer({'dest': 'uploads/'});
-const { asyncErrorHandler } = require('../middleware');
-const { 
-  postIndex,
-  postNew,
-  postCreate,
-  postShow,
-  postEdit,
-  postUpdate,
-  postDestroy
-} = require('../controllers/posts');
+const passport = require('passport');
+const { asyncMiddleware, isLoggedIn, sanitizeBody, checkPostOwner, findLocation } = require('../middleware');
+const { index, newPost, create, show, edit, update, destroy } = require('../controllers/posts');
+const { upload } = require('../config/cloudinary');
+const paginate = require('express-paginate');
 
-router.get('/', asyncErrorHandler(postIndex));
+router.use(paginate.middleware(9, 50));
+router.use(isLoggedIn);
 
-router.get('/new', postNew);
+// INDEX
+router.get('/', asyncMiddleware(index));
 
-router.post('/', upload.array('images', 4), asyncErrorHandler(postCreate));
+// NEW
+router.get('/new', newPost);
 
-router.get('/:id', asyncErrorHandler(postShow));
+// CREATE
+router.post('/', upload.single('image'), sanitizeBody, asyncMiddleware(create));
 
-router.get('/:id/edit', asyncErrorHandler(postEdit));
+// SHOW
+router.get('/:id', show);
 
-router.put('/:id', upload.array('images', 4), asyncErrorHandler(postUpdate));
+// EDIT
+router.get('/:id/edit', checkPostOwner, edit);
 
-router.delete('/:id', asyncErrorHandler(postDestroy));
+// UPDATE
+router.put('/:id', upload.single('image'), sanitizeBody, asyncMiddleware(update));
 
+// DESTROY
+router.delete('/:id', checkPostOwner, destroy);
 
 module.exports = router;
