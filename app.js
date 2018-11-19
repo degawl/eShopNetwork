@@ -1,95 +1,115 @@
-require('dotenv').config();
+require('dotenv').config()
 
-const createError = require('http-errors');
 const express = require('express');
-const engine = require('ejs-mate');
 const path = require('path');
-const cookieParser = require('cookie-parser');
+const favicon = require('serve-favicon');
 const logger = require('morgan');
+const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const passport = require('passport');
-const User = require('./models/user');
+const flash = require('connect-flash');
 const session = require('express-session');
+const expressSanitizer = require('express-sanitizer');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 const methodOverride = require('method-override');
+const engine = require('ejs-mate');
+const User = require('./models/user');
+const configAuth = require('./config/auth'); // is this needed?
+//const seedDB = require('./seeds');
 
-const index = require('./routes/index');
-const posts = require('./routes/posts');
-const reviews = require('./routes/reviews');
+const index 		= require('./routes/index');
+const posts 		= require('./routes/posts');
+const comments  = require('./routes/comments');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/eshop-network', { useNewUrlParser: true });
+// assign mongoose promise library and connect to database
+mongoose.Promise = global.Promise;
+//process.env.DATABASE_URI || 
+const databaseUri = ('mongodb://localhost:27017/eshop-network-mapbox');
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-  console.log("we're connected!");
-});
+mongoose.connect(databaseUri)
+      .then(() => console.log(`Database connected`))
+      .catch(err => console.log(`Database connection error: ${err.message}`));
 
+// Seed the database
+//seedDB();
+
+// view engine and layout-templates setup
 app.engine('ejs', engine);
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.set(express.static('public'));
-
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(expressSanitizer());
 app.use(methodOverride('_method'));
+app.use(flash());
+//require moment
+app.locals.moment = require('moment');
 
-app.use(session({
-  secret: 'hang ten dude',
-  resave: false,
-  saveUninitialized: true
+// PASSPORT CONFIGURATION
+app.use(require('express-session')({
+    secret: 'Super duper secret secret!',
+    resave: false,
+    saveUninitialized: false
 }));
-
 app.use(passport.initialize());
 app.use(passport.session());
 
-// CHANGE: USE "createStrategy" INSTEAD OF "authenticate"
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+app.use(function(req, res, next){
+   res.locals.currentUser = req.user;
+   res.locals.error = req.flash('error');
+   res.locals.success = req.flash('success');
+   // assign local variable page so we don't have to test
+   // if page exists (is not undefined) in the nav partial
+   res.locals.page = '';
+   // define default title if no title is assigned in res.render()
+   res.locals.title = 'eShopNetwork';
+   
+   next();
+});
 
-app.use(function(req, res, next) {
-  req.user = {
-    '_id' : '5be962214d767427d7a508f5',
-    'username' : 'isabel'
-  }
-  res.locals.currentUser = req.user;
-  res.locals.title = 'e-Shop Network'
-  res.locals.success = req.session.success ||'';
-  delete req.session.success;
-  res.locals.error = req.session.error ||'';
-  delete req.session.error;
-  next();
+app.use(function(req, res, next){
+   res.locals.currentUser = req.user;
+   next();
 });
 
 app.use('/', index);
 app.use('/posts', posts);
-app.use('/posts/:id/reviews', reviews);
+app.use('/posts/:id/comments', comments);
+app.get('/secret', function(req, res, next) { 
+  req.body.username = 'devon'; 
+  req.body.password = 'password';
+  next();
+}, passport.authenticate('local-login', 
+      {
+          successRedirect: '/posts',
+          failureRedirect: '/login'
+      }), function(req, res){
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  //res.locals.message = err.message;
-  //res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  //res.status(err.status || 500);
-  //res.render('error');
-  console.log(err);
-  req.session.error = err.message;
-  res.redirect('back');
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  console.log(err.message);
+  res.status(err.status || 500);
+  res.render('error');
 });
 
 module.exports = app;

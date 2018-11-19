@@ -1,5 +1,78 @@
 <% layout('layouts/boilerplate') -%>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p>Currently under construction</p>
 
+<div class="jumbotron">
+	<div class="row">
+		<div class="<%= !currentUser ? 'col-md-8' : 'col-md-12' %>">
+		  <h1 class="<%= currentUser ? 'display-3' : 'display-4' %>">
+		  	Welcome to <%= title %> <%= currentUser != undefined ? currentUser.local.username || currentUser.facebook.name : '' %>
+			</h1>
+		  <p class="lead">Yoyo waddup, buy some shit.</p>
+		  <hr class="my-4">
+		  <% if (currentUser) { %>
+		  <p class="lead">
+		    <p><a class="btn btn-outline-primary btn-lg" href="/posts" role="button">Browse Boards &raquo;</a></p>
+		  </p>
+		  <% } %>
+		  <div class="row">
+		  	<div class="col-md-12">
+		  		<h3>Shop by Category</h3>
+		  		<p>
+		  			<a href="/posts?post%5Bcategory%5D=Electronics">Electronics</a> |
+		  			<a href="/posts?post%5Bcategory%5D=Fashion">Fashion</a> |
+		  			<a href="/posts?post%5Bcategory%5D=Health">Health</a> |
+		  			<a href="/posts?post%5Bcategory%5D=Entertainment">Entertainment</a> |
+		  			<a href="/posts?post%5Bcategory%5D=Miscellaneous">Miscellaneous</a>
+		  		</p>
+		  	</div>
+		  	<div class="col-md-12">
+		  		<h3>Latest Boards</h3>
+		  	</div>
+				<% posts.forEach(function(post) { %>
+		  	<div class="col-md-3">
+					<div class="card h-100">
+					  <a href="/posts/<%= post.id %>"><img class="card-img-top" src="<%= post.image %>" alt="<%= post.title %>"></a>
+					  <div class="card-body">
+					    <h4 class="card-title">
+					      <a href="/posts/<%= post.id %>"><%= post.title %></a>
+					    </h4>
+					    <h5>$<%= post.price %>.00</h5>
+					    <p class="card-text"><%- post.description.substring(0, 20) %><%= post.description.length > 20 ? '...' : '' %></p>
+					    <a href="/posts/<%= post.id %>" class="btn btn-outline-primary">View Board</a>
+					  </div>
+					  <div class="card-footer">
+					    <small class="text-muted float-left"><%= post.category %></small>
+					    <small class="text-muted float-right"><%= post.condition %></small>
+					  </div>
+					</div>
+				</div>
+				<%}) %>
+		  </div>
+		</div>
+		<% if (!currentUser) { %>
+		<div class="col-md-4">
+		  <div class="form-auth">
+		    <form class="mb-3" action="/login" method="POST">
+		      <h2 class="form-auth-heading">Sign in</h2>
+		      <label for="inputUsername" class="sr-only">Username</label>
+		      <input type="text" id="inputUsername" class="form-control top" name="username" placeholder="Username" required autofocus>
+		      <label for="inputPassword" class="sr-only">Password</label>
+		      <input type="password" id="inputPassword" class="form-control bottom" name="password" placeholder="Password" required>
+
+		      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		    </form>
+
+		    <div class="mb-3">
+		      <div><a href="/forgot">Forgot password?</a></div>
+		      <div>No account? <a href="/signup">Sign up</a></div>
+		    </div>
+
+		    <a href="/auth/facebook/login">
+		      <button class="btn btn-lg btn-primary">
+		        <i class="fa fa-facebook-official" aria-hidden="true"></i> Log in with Facebook
+		      </button>
+		    </a>
+		  </div>		
+		</div>
+		<% } %>
+	</div>
+</div>

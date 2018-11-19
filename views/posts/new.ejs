@@ -1,14 +1,53 @@
 <% layout('layouts/boilerplate') -%>
-<h1>New Post!</h1>
-
+<h1>New Post</h1>
 <form action="/posts" method="POST" enctype="multipart/form-data">
-	<div><input type="text" name="post[title]" placeholder="Title"></div>
-	<div><input type="text" name="post[price]" placeholder="Price"></div>
-	<div>
-		<input type="file" accept="images/*" name="images" multiple />
-	</div>
-	<div><textarea name="post[description]" placeholder="Description"></textarea></div>
-	<div><input type="text" name="post[location]" placeholder="Location"></div>
+  <div class="form-group">
+    <label for="input-title">Title</label>
+    <input type="text" class="form-control" id="input-title" name="post[title]" placeholder="Title" required>
+  </div>
+  <div class="form-group">
+    <label for="input-location">Location</label>
+    <input type="text" class="form-control" id="input-location" name="post[location]" placeholder="Location" required>
+  </div>
+  <div class="form-group">
+  	<label for="select-condition">Condition</label>
+  	<select class="form-control" id="select-condition" name="post[condition]" required>
+			<option value="" selected disabled>Select Condition</option>
+  	  <option value="Excellent">Excellent</option>
+  	  <option value="Good">Good</option>
+  	  <option value="Poor">Poor</option>
+  	</select>
+  </div>
+  <div class="form-group">
+    <label for="select-category">Condition</label>
+    <select class="form-control" id="select-category" name="post[category]" required>
+      <option value="" selected disabled>Select Category</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Fashion">Fashion</option>
+      <option value="Health">Health</option>
+      <option value="Entertainment">Entertainment</option>
+      <option value="Miscellaneous">Miscellaneous</option>      
+    </select>
+  </div>
+  <div class="form-group">
+	  <label for="textarea-body">Description</label>
+	  <textarea class="form-control" rows="3" id="textarea-body" name="post[description]" placeholder="Description" required></textarea>
+  </div>
+  <div class="form-group">
+    <label class="sr-only" for="input-amount">Price</label>
+    <div class="input-group">
+      <div class="input-group-addon">$</div>
+      <input type="text" class="form-control" id="input-amount" name="post[price]" placeholder="Price" required>
+      <div class="input-group-addon">.00</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="input-image">Image</label>
+    <input type="file" id="input-image" name="image" accept="image/*" required>
+  </div>
 
-	<input type="submit">
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+<!-- Google Places API
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkG51lwJtDvYFKTBdRZlhzYg1D4QFsXPU&libraries=places&callback=activatePlacesSearch" async defer></script> -->
