@@ -11,6 +11,10 @@ body {
   background-color: #ecedf0; 
 }
 
+#posts-row {
+  margin-bottom: 30px;
+}
+
 /* Hide distance options in filter form */
 #distance {
   display: none;
@@ -73,6 +77,13 @@ body {
 }
 
 #jumbotron__main {
+  background-color: #fff;
+}
+
+#jumbotron__side {
+  margin-top: 10px;
+  padding-top: 30px;
+  padding-bottom: 20px;
   background-color: #fff;
 }
 
