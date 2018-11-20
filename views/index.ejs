@@ -1,6 +1,6 @@
 <% layout('layouts/boilerplate') -%>
 
-<div class="jumbotron">
+<div class="jumbotron shadow__simple">
 	<div class="row">
 		<div class="<%= !currentUser ? 'col-md-8' : 'col-md-12' %>">
 		  <h1 class="<%= currentUser ? 'display-3' : 'display-4' %>">
@@ -10,7 +10,7 @@
 		  <hr class="my-4">
 		  <% if (currentUser) { %>
 		  <p class="lead">
-		    <p><a class="btn btn-outline-primary btn-lg" href="/posts" role="button">Browse Boards &raquo;</a></p>
+		    <p><a class="btn btn-outline-primary btn-lg" href="/posts" role="button">Browse Products &raquo;</a></p>
 		  </p>
 		  <% } %>
 		  <div class="row">
@@ -28,14 +28,14 @@
 		  		<h3>Latest Posts</h3>
 		  	</div>
 				<% posts.forEach(function(post) { %>
-		  	<div class="col-md-3">
+		  	<div class="col-md-4">
 					<div class="card h-100 shadow">
 					  <a href="/posts/<%= post.id %>"><img class="card-img-top" src="<%= post.image %>" alt="<%= post.title %>"></a>
 					  <div class="card-body">
 					    <h4 class="card-title">
 					      <a href="/posts/<%= post.id %>"><%= post.title %></a>
 					    </h4>
-					    <h5>$<%= post.price %>.00</h5>
+					    <h5>€<%= post.price %>.00</h5>
 					    <p class="card-text"><%- post.description.substring(0, 20) %><%= post.description.length > 20 ? '...' : '' %></p>
 					    <a href="/posts/<%= post.id %>" class="btn btn-outline-primary">View Post</a>
 					  </div>
