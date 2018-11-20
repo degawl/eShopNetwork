@@ -27,8 +27,7 @@ const app = express();
 // assign mongoose promise library and connect to database
 mongoose.Promise = global.Promise;
 //process.env.DATABASE_URI || 
-const databaseUri = ('mongodb://localhost:27017/eshop-network-mapbox');
-
+const databaseUri = (process.env.DATABASE_URI || 'mongodb://localhost:27017/eshop-network-mapbox');
 mongoose.connect(databaseUri, { useNewUrlParser: true })
       .then(() => console.log(`Database connected`))
       .catch(err => console.log(`Database connection error: ${err.message}`));
