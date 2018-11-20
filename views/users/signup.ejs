@@ -3,14 +3,16 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="form-auth">
-			<form method="POST">
-			  <h2>Reset Password</h2>
-		    <label for="password" class="sr-only">New Password</label>
-		    <input type="password" name="password" placeholder="New password" autofocus="autofocus" class="form-control top"/>
-		    <label for="confirm" class="sr-only">Confirm Password</label>
-		    <input type="password" name="confirm" placeholder="Confirm password" class="form-control bottom"/>
-		    
-		    <button type="submit" class="btn btn-primary btn-lg btn-block">Update Password</button>
+			<form class="form-signin" action="/connect/local" method="POST">
+			  <h2 class="form-signin-heading">Connect local</h2>
+			  <label for="inputUsername" class="sr-only">Username</label>
+			  <input type="text" id="inputUsername" class="form-control top" name="username" placeholder="Username" required autofocus>
+			  <label for="inputEmail" class="sr-only">Email</label>
+			  <input type="email" id="inputEmail" class="form-control middle" name="email" placeholder="Email" required>
+			  <label for="inputPassword" class="sr-only">Password</label>
+			  <input type="password" id="inputPassword" class="form-control bottom" name="password" placeholder="Password" required>
+
+			  <button class="btn btn-lg btn-primary btn-block" type="submit">Connect local</button>
 			</form>
 		</div>
 	</div>
