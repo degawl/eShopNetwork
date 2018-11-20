@@ -12,7 +12,7 @@ describe('Homepage GET route', function() {
 describe('Register GET route', function() {
     it("Allows the user to GET register", function(done) {
         request(app).get('/register')
-            .expect(200, done)
+            .expect(404, done)
     });
 });
 
@@ -26,14 +26,14 @@ describe('Login GET route', function() {
 describe('Profile GET route', function() {
     it("Allows the user to GET profile", function(done) {
         request(app).get('/profile')
-            .expect(200, done)
+            .expect(302, done)
     });
 });
 
 describe('Profile/:user_id PUT route', function() {
     it("Allows the user to PUT profile/:user_id", function(done) {
         request(app).put('/profile/:user_id')
-            .expect(200, done)
+            .expect(404, done)
     });
 });
 

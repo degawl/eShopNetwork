@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "build": "webpack"
+    "build": "webpack",
+    "test": "mocha"
   },
   "babel": {
     "presets": [
@@ -14,6 +15,7 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
     "cloudinary": "^1.11.0",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
@@ -36,6 +38,7 @@
     "mailgun-js": "^0.22.0",
     "method-override": "^2.3.10",
     "mime": ">=1.4.1",
+    "mocha": "^5.2.0",
     "moment": "^2.22.2",
     "mongoose": "^5.3.9",
     "mongoose-paginate": "^5.0.3",
@@ -48,6 +51,7 @@
     "randomatic": ">=3.0.0",
     "serve-favicon": "^2.4.5",
     "sshpk": ">=1.13.2",
+    "supertest": "^3.3.0",
     "tough-cookie": ">=2.3.3"
   },
   "devDependencies": {
