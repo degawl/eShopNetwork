@@ -1,8 +1,9 @@
 <% layout('layouts/boilerplate') -%>
 
 <div class="row">
-  <div class="col-lg-3">
-    <h3>Filter By:</h3>
+	<div class="col-lg-3">
+		<div id="jumbotron__side" class="jumbotron shadow__simple">
+		<h3>Filter By:</h3>
     <form action="/posts" method="GET" id="post-filter-form">
     	<fieldset>
     		<legend id="condition-legend">Condition</legend>
@@ -26,27 +27,27 @@
     		<legend id="category-legend">Category</legend>
     		<div class="form-check form-check-inline">
     		  <label class="form-check-label">
-    		    <input class="form-check-input" type="checkbox" value="short" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Electronics') ? 'checked' : '' %>> Electronics
+    		    <input class="form-check-input" type="checkbox" value="Electronics" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Electronics') ? 'checked' : '' %>> Electronics
     		  </label>
     		</div>
     		<div class="form-check form-check-inline">
     		  <label class="form-check-label">
-    		    <input class="form-check-input" type="checkbox" value="long" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Fashion') ? 'checked' : '' %>> Fashion
+    		    <input class="form-check-input" type="checkbox" value="Fashion" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Fashion') ? 'checked' : '' %>> Fashion
     		  </label>
     		</div>
     		<div class="form-check form-check-inline">
     		  <label class="form-check-label">
-    		    <input class="form-check-input" type="checkbox" value="fish" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Health') ? 'checked' : '' %>> Health
+    		    <input class="form-check-input" type="checkbox" value="Health" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Health') ? 'checked' : '' %>> Health
     		  </label>
     		</div>
     		<div class="form-check form-check-inline">
     		  <label class="form-check-label">
-    		    <input class="form-check-input" type="checkbox" value="gun" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Entertainment') ? 'checked' : '' %>> Entertainment
+    		    <input class="form-check-input" type="checkbox" value="Entertainment" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Entertainment') ? 'checked' : '' %>> Entertainment
     		  </label>
     		</div>
     		<div class="form-check form-check-inline">
     		  <label class="form-check-label">
-    		    <input class="form-check-input" type="checkbox" value="foam" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Miscellaneous') ? 'checked' : '' %>> Miscellaneous
+    		    <input class="form-check-input" type="checkbox" value="Miscellaneous" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Miscellaneous') ? 'checked' : '' %>> Miscellaneous
     		  </label>
     		</div>
     	</fieldset>
@@ -68,7 +69,7 @@
 	    	<input type="text" class="form-control" id="input-location" name="post[location]" placeholder="Address or Zipcode">
 	    </div>
     	<div class="form-group" id="distance">
-	  		<p>Distance (miles)</p>
+	  		<p>Distance (km)</p>
 	    	<div class="form-check form-check-inline">
 	    	  <label class="form-check-label">
 	    	    <input class="form-check-input" type="radio" name="post[distance]" id="distance1" value="25"> 25
@@ -85,9 +86,9 @@
 	    	  </label>
 	    	</div>
 	    </div>
-
     	<input type="submit" class="btn btn-outline-primary btn-block mb-3" role="button" value="Go!">
     </form>
+		</div>
 
   </div> 
   <!-- /.col-lg-3 -->
@@ -145,15 +146,10 @@
 					</ul>
 				</nav>
 			</div>
-			<!-- /.col-3 -->
 		</div>
-		<!-- /.row -->
 		<% } %>
   </div>
-  <!-- /.col-lg-9 -->
-
 </div>
-<!-- /.row -->
 
 <script>
 	var posts = <%- JSON.stringify(posts) %>;

@@ -72,7 +72,6 @@ app.use(function(req, res, next){
    res.locals.page = '';
    // define default title if no title is assigned in res.render()
    res.locals.title = 'eShopNetwork';
-   
    next();
 });
 

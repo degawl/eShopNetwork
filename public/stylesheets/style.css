@@ -11,6 +11,10 @@ body {
   background-color: #ecedf0; 
 }
 
+#posts-row {
+  margin-bottom: 30px;
+}
+
 /* Hide distance options in filter form */
 #distance {
   display: none;
@@ -24,7 +28,11 @@ body {
 /* Google Map styles */
 #index-map, #show-map {
 	height: 300px;
-	width: 100%;
+  width: 100%;
+  -webkit-box-shadow: 0 4px 6px -6px #999;
+  -moz-box-shadow: 0 8px 6px -6px #999;
+  box-shadow: 0 8px 12px -6px rgb(109, 108, 108);
+  
 }
 
 /* Sticky Footer*/
@@ -69,6 +77,13 @@ body {
 }
 
 #jumbotron__main {
+  background-color: #fff;
+}
+
+#jumbotron__side {
+  margin-top: 10px;
+  padding-top: 30px;
+  padding-bottom: 20px;
   background-color: #fff;
 }
 
