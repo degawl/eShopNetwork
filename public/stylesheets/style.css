@@ -81,7 +81,7 @@ body {
 }
 
 #jumbotron__side {
-  margin-top: 10px;
+  width: 105%;
   padding-top: 30px;
   padding-bottom: 20px;
   background-color: #fff;
