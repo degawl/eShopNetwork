@@ -87,6 +87,13 @@ body {
   background-color: #fff;
 }
 
+#jumbotron__cat {
+  background-color: #fff;
+  padding: 10px;
+  padding-top: 15px;
+  margin-left: 15px;
+}
+
 .navbar {
   background-color:#0f1418;
   -webkit-box-shadow: 0 4px 6px -6px #999;
