@@ -1,6 +1,9 @@
 {
   "name": "eshop-network",
   "version": "0.0.0",
+  "engines": {
+    "node": "8.11.3"
+  },
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
