@@ -12,6 +12,16 @@ Technologies used: Node.js, Express.js, Google Maps API, Passport.js, MongoDB, C
 $ git clone git@github.com:degawl/eshopnetwork.git
 $ cd eshopnetwork
 Configure local MongoDB in app.js
+add API Keys for
+
+  CLOUDINARY_API_KEY
+  CLOUDINARY_API_SECRET
+  FB_APP_ID
+  FB_APP_SECRET
+  GOOGLE_MAPS_API_KEY
+  DATABASE_URI
+  MAILGUN_KEY
+  
 $ npm install
 $ mongo
 $ nodemon
