@@ -33,6 +33,7 @@
     "express-paginate": "^0.3.0",
     "express-sanitizer": "^1.0.4",
     "express-session": "^1.15.6",
+    "fbgraph": "^1.4.4",
     "formidable": "^1.2.1",
     "geocoder": "^0.2.3",
     "hoek": "^6.0.3",
