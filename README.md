@@ -19,7 +19,7 @@ add API Keys for
   FB_APP_ID
   FB_APP_SECRET
   GOOGLE_MAPS_API_KEY
-  DATABASE_URI
+  DATABASE_URI (value in quotes)
   MAILGUN_KEY
   
 $ npm install
