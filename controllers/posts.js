@@ -38,7 +38,7 @@ module.exports = {
 		res.redirect(`/posts/${post.id}`);
 	},
 	async postShow(req, res, next) {
-		throw new Error('ERRROOOOOOOR!');
+		//throw new Error('ERRROOOOOOOR!');
 		let post = await Post.findById(req.params.id);
 		res.render('posts/show', { post });
 	},
