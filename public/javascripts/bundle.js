@@ -209,12 +209,8 @@
     };
     
     function pageBtnClick(event) {
-        // can't get this to work with event.target instead of this???
-        // prevent form from submitting
         event.preventDefault();
-        // pull url from link href
         var url = $(this).attr('href');
-        // submit GET request to url
         $.get(url).done(paintDom).fail(handleError);
     };
     
@@ -311,11 +307,6 @@
         $('#loader').show();
     
         infoWindow = new google.maps.InfoWindow();
-        // Try HTML5 geolocation.
-        // Note: This example requires that you consent to location sharing when
-        // prompted by your browser. If you see the error "The Geolocation service
-        // failed.", it means you probably did not give permission for the browser to
-        // locate you.
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
                 userLocation = {

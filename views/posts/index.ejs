@@ -4,7 +4,8 @@
 	<div class="col-lg-3">
 		<div id="jumbotron__side" class="jumbotron shadow__simple">
 		<h3>Filter By:</h3>
-    <form action="/posts" method="GET" id="post-filter-form">
+		<form action="/posts" method="GET" id="post-filter-form">
+		<hr>
     	<fieldset>
     		<legend id="condition-legend">Condition</legend>
     		<div class="form-check">
@@ -22,8 +23,9 @@
     		    <input class="form-check-input" type="checkbox" value="poor" name="post[condition]" checked> Poor
     		  </label>
     		</div>
-    	</fieldset>
-    	<fieldset>
+			</fieldset>
+			<hr>
+			<fieldset>
     		<legend id="category-legend">Category</legend>
     		<div class="form-check ">
     		  <label class="form-check-label">
@@ -65,7 +67,8 @@
     		    <input class="form-check-input" type="checkbox" value="Miscellaneous" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Miscellaneous') ? 'checked' : '' %>> Miscellaneous
     		  </label>
     		</div>
-    	</fieldset>
+			</fieldset>
+			<hr>
     	<div class="form-group">
     		<p>Price</p>
     		<div class="row">
@@ -78,7 +81,8 @@
 	    				<input type="number" class="form-control" id="max" name="post[price][max]" min="0" max="10000" step="1" step="1" placeholder="Max">
 	    			</div>
 	    	</div>
-	    </div>
+			</div>
+			<hr>
     	<div class="form-group">
 	    	<label for="input-location">Location</label> <small class="float-right"><i class="fa fa-location-arrow" aria-hidden="true"></i> <a href="#" id="use-my-location">My location</a></small>
 	    	<input type="text" class="form-control" id="input-location" name="post[location]" placeholder="Address or Zipcode">

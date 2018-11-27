@@ -31,6 +31,7 @@ module.exports = {
 		try {
 				let post = await Post.findById(req.params.id);
 				if (!post.author._id.equals(req.user._id)) {
+					console.log(req.user.local.username);
 					req.flash('error', 'You\'re not the owner of this post.');
 					return res.redirect('/');
 				}
