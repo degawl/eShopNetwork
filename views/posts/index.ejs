@@ -7,17 +7,17 @@
     <form action="/posts" method="GET" id="post-filter-form">
     	<fieldset>
     		<legend id="condition-legend">Condition</legend>
-    		<div class="form-check form-check-inline">
+    		<div class="form-check">
     		  <label class="form-check-label">
     		    <input class="form-check-input" type="checkbox" value="excellent" name="post[condition]" checked> Excellent
     		  </label>
     		</div>
-    		<div class="form-check form-check-inline">
+    		<div class="form-check">
     		  <label class="form-check-label">
     		    <input class="form-check-input" type="checkbox" value="good" name="post[condition]" checked> Good
     		  </label>
     		</div>
-    		<div class="form-check form-check-inline">
+    		<div class="form-check">
     		  <label class="form-check-label">
     		    <input class="form-check-input" type="checkbox" value="poor" name="post[condition]" checked> Poor
     		  </label>
@@ -25,42 +25,42 @@
     	</fieldset>
     	<fieldset>
     		<legend id="category-legend">Category</legend>
-    		<div class="form-check form-check-inline">
+    		<div class="form-check ">
     		  <label class="form-check-label">
     		    <input class="form-check-input" type="checkbox" value="Electronics" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Electronics') ? 'checked' : '' %>> Electronics
     		  </label>
     		</div>
-    		<div class="form-check form-check-inline">
+    		<div class="form-check">
     		  <label class="form-check-label">
 						<input class="form-check-input" type="checkbox" value="Fashion" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Fashion') ? 'checked' : '' %>> Fashion
     		  </label>
 				</div>
-				<div class="form-check form-check-inline">
+				<div class="form-check">
     		  <label class="form-check-label">
 						<input class="form-check-input" type="checkbox" value="Cars" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Cars') ? 'checked' : '' %>> Cars
     		  </label>
 				</div>
-				<div class="form-check form-check-inline">
+				<div class="form-check">
     		  <label class="form-check-label">
     		    <input class="form-check-input" type="checkbox" value="Mechanics" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Mechanics') ? 'checked' : '' %>> Mechanics
     		  </label>
     		</div>
-				<div class="form-check form-check-inline">
+				<div class="form-check">
     		  <label class="form-check-label">
     		    <input class="form-check-input" type="checkbox" value="Furniture" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Furniture') ? 'checked' : '' %>> Furniture
     		  </label>
     		</div>
-    		<div class="form-check form-check-inline">
+    		<div class="form-check">
     		  <label class="form-check-label">
     		    <input class="form-check-input" type="checkbox" value="Health" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Health') ? 'checked' : '' %>> Health
     		  </label>
     		</div>
-    		<div class="form-check form-check-inline">
+    		<div class="form-check">
     		  <label class="form-check-label">
     		    <input class="form-check-input" type="checkbox" value="Entertainment" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Entertainment') ? 'checked' : '' %>> Entertainment
     		  </label>
     		</div>
-    		<div class="form-check form-check-inline">
+    		<div class="form-check">
     		  <label class="form-check-label">
     		    <input class="form-check-input" type="checkbox" value="Miscellaneous" name="post[category]" <%= typeof category === 'undefined' ? 'checked' : category.includes('Miscellaneous') ? 'checked' : '' %>> Miscellaneous
     		  </label>
@@ -80,22 +80,22 @@
 	    	</div>
 	    </div>
     	<div class="form-group">
-	    	<label for="input-location">Location</label> <small class="float-right"><i class="fa fa-location-arrow" aria-hidden="true"></i> <a href="#" id="use-my-location">use my location</a></small>
+	    	<label for="input-location">Location</label> <small class="float-right"><i class="fa fa-location-arrow" aria-hidden="true"></i> <a href="#" id="use-my-location">My location</a></small>
 	    	<input type="text" class="form-control" id="input-location" name="post[location]" placeholder="Address or Zipcode">
 	    </div>
     	<div class="form-group" id="distance">
 	  		<p>Distance (km)</p>
-	    	<div class="form-check form-check-inline">
+	    	<div class="form-check">
 	    	  <label class="form-check-label">
 	    	    <input class="form-check-input" type="radio" name="post[distance]" id="distance1" value="25"> 25
 	    	  </label>
 	    	</div>
-	    	<div class="form-check form-check-inline">
+	    	<div class="form-check">
 	    	  <label class="form-check-label">
 	    	    <input class="form-check-input" type="radio" name="post[distance]" id="distance2" value="50"> 50
 	    	  </label>
 	    	</div>
-	    	<div class="form-check form-check-inline">
+	    	<div class="form-check">
 	    	  <label class="form-check-label">
 	    	    <input class="form-check-input" type="radio" name="post[distance]" id="distance3" value="100"> 100
 	    	  </label>
