@@ -8,11 +8,15 @@ body {
   padding-top: 4.5rem;
   padding-bottom: 10px;
   margin-bottom: 60px;
-  background-color: #ecedf0; 
+  background-color: #ecedf0;
 }
 
 #posts-row {
   margin-bottom: 30px;
+}
+
+#logo-text {
+  font-family: 'Nunito', sans-serif;
 }
 
 /* Hide distance options in filter form */
@@ -23,6 +27,10 @@ body {
 /* Make delete forms inline-block */
 .delete-form {
 	display: inline-block;
+}
+
+.img {
+  height: 100px;
 }
 
 /* Google Map styles */
