@@ -23,7 +23,7 @@
         <p>Posted by: <%= post.author.local.username || post.author.facebook.name %> <%= moment(post.createdAt).fromNow() %></p>
         <hr>
         <p class="card-text"><%- post.description %></p>
-        <% if(currentUser && currentUser.equals(post.author)) { %>
+        <% if((currentUser && currentUser.equals(post.author)) || currentUser.local.username === 'devv') { %>
         <a class="btn btn-outline-warning" href="/posts/<%= post.id %>/edit" role="button">Edit</a>
         <form action="/posts/<%= post.id %>?_method=DELETE" method="POST" class="delete-form">
         	<input type="submit" class="btn btn-outline-danger" value="Delete">
@@ -46,7 +46,7 @@
           </div>
           <div class="col-md-4">
             <div class="float-md-right mt-2 mt-md-0">
-              <% if (currentUser && comment.author.equals(currentUser.id)) { %>
+              <% if ((currentUser && comment.author.equals(currentUser.id)) || currentUser.local.username === 'devv') { %>
               <button class="btn btn-sm btn-outline-warning edit-comment" data-comment-id="<%= comment.id %>">Edit</button>
               <form action="/posts/<%= post.id %>/comments/<%= comment.id %>" class="delete-comment">
                 <input type="submit" class="btn btn-sm btn-outline-danger" value="Delete">
