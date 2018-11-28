@@ -24,9 +24,9 @@ const {
   postResetToken
 } = require('../controllers/users');
 
-router.get('/.well-known/acme-challenge/MNetWhD1zhi85827wOlvGxe7bDvE-itM7b-a4iM1uUk', function(req, res) {
-  res.send('MNetWhD1zhi85827wOlvGxe7bDvE-itM7b-a4iM1uUk.kJeEa5myifphKFGOOgreM8AFZIzBpkvZU63uDm4YK5A')
-})
+router.get('/.well-known/acme-challenge/-8e0Z3bAk_JJ5MtWDlhe-fwVyqGot-lKDPFyUpbQw0k', function(req, res) {
+  res.send('-8e0Z3bAk_JJ5MtWDlhe-fwVyqGot-lKDPFyUpbQw0k.kJeEa5myifphKFGOOgreM8AFZIzBpkvZU63uDm4YK5A')
+});
 
 router.get('/', asyncMiddleware(index));
 
