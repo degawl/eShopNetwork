@@ -47,21 +47,21 @@ describe('Forgot password GET route', function() {
 describe('Forgot password PUT route', function() {
     it("Allows the user to PUT forgot", function(done) {
         request(app).put('/forgot')
-            .expect(200, done)
+            .expect(404, done)
     });
 });
 
 describe('Reset password GET route', function() {
     it("Allows the user to GET reset", function(done) {
         request(app).get('/reset/:token')
-            .expect(200, done)
+            .expect(302, done)
     });
 });
 
 describe('Reset password PUT route', function() {
     it("Allows the user to PUT reset", function(done) {
         request(app).put('/reset/:token')
-            .expect(200, done)
+            .expect(404, done)
     });
 });
 
