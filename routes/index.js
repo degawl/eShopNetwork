@@ -24,10 +24,6 @@ const {
   postResetToken
 } = require('../controllers/users');
 
-router.get('/.well-known/acme-challenge/-8e0Z3bAk_JJ5MtWDlhe-fwVyqGot-lKDPFyUpbQw0k', function(req, res) {
-  res.send('-8e0Z3bAk_JJ5MtWDlhe-fwVyqGot-lKDPFyUpbQw0k.kJeEa5myifphKFGOOgreM8AFZIzBpkvZU63uDm4YK5A')
-});
-
 router.get('/', asyncMiddleware(index));
 
 router.get('/signup', getSignup);
