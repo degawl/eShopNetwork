@@ -26,3 +26,86 @@ module.exports = {
 		res.status(200).json({message: 'Comment deleted successfully'});
 	}
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports = {
+	createComment: function() {
+		return 'Success';
+	},
+
+	deleteComment: function() {
+		return 'Successfully Deleted'
+	},
+
+	updateComment: function() {
+		return 'Successfully updated'
+	}
+}
