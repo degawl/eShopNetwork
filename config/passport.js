@@ -71,12 +71,11 @@ module.exports = (passport) => {
   },
   (req, username, password, done) => { // callback with username and password from our form
       User.findOne({ 'local.username' :  username }, (err, user) => {
-          // if there are any errors, return the error before anything else
           if (err)
               return done(err);
 
           if (!user || !user.validPassword(password))
-              return done(null, false, req.flash('error', 'Incorrect username or password.')); // req.flash is the way to set flashdata using connect-flash
+              return done(null, false, req.flash('error', 'Incorrect username or password.'));
 
           return done(null, user);
       });
@@ -86,7 +85,7 @@ module.exports = (passport) => {
   //FaceBook Login
 
   var fbStrategy = configAuth.facebookAuth;
-  fbStrategy.passReqToCallback = true;  // allows us to pass in the req from our route (lets us check if a user is logged in or not)
+  fbStrategy.passReqToCallback = true;
   passport.use(new FacebookStrategy(fbStrategy,
   function(req, token, refreshToken, profile, done) {
 
@@ -97,9 +96,7 @@ module.exports = (passport) => {
           User.findOne({ 'facebook.id' : profile.id }, function(err, user) {
               if (err)
                 return done(err);
-
               if (user) {
-
                   if (!user.facebook.token) {
                     user.facebook.token = token;
                     user.facebook.name  = profile.name.givenName + ' ' + profile.name.familyName;
@@ -113,9 +110,8 @@ module.exports = (passport) => {
                     });
                   }
 
-                  return done(null, user); // user found, return that user
+                  return done(null, user);
               } else {
-                  // if there is no user, create them
                   var newUser            = new User();
 
                   newUser.facebook.id    = profile.id;
@@ -133,7 +129,6 @@ module.exports = (passport) => {
           });
 
       } else {
-          // user already exists and is logged in, we have to link accounts
           var user            = req.user;
           user.facebook.id    = profile.id;
           user.facebook.token = token;
@@ -143,7 +138,6 @@ module.exports = (passport) => {
           user.save(function(err) {
             if (err)
               return done(err);
-                
             return done(null, user);
           });
       }
