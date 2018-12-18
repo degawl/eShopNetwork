@@ -492,3 +492,347 @@
     /***/ })
     /******/ ]);
 
+    /* RANDOmshit
+$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });$('#comments').on('submit', '.delete-comment', function (e) {
+        e.preventDefault();
+        var response = confirm('Are you sure?');
+        if (response) {
+            var url = $(this).attr('action');
+            var $form = $(this);
+            $.ajax({
+                url: url,
+                method: 'DELETE',
+                $form: $form
+            }).done(function (data) {
+                console.log('Successfully deleted!');
+                $form.closest('.row').remove();
+            }).fail(function (jqXHR, exception) {
+                alert(exception);
+            });
+        }
+    });
+    */
+
