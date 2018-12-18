@@ -21,4 +21,126 @@ module.exports = {
             req.logout();
             res.redirect('/');
     }
+    });
+        await User.register(newUser, req.body.password);
+        res.redirect('/');
+    },
+    postLogin(req, res, next) {
+        passport.authenticate('local', { 
+            successRedirect: '/',
+            failureRedirect: '/login'
+      })(req, res, next);
+    },
+    getLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.register(newUser, req.body.password);
+        res.redirect('/');
+    },
+    postLogin(req, res, next) {
+        passport.authenticate('local', { 
+            successRedirect: '/',
+            failureRedirect: '/login'
+      })(req, res, next);
+    },
+    getLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.register(newUser, req.body.password);
+        res.redirect('/');
+    },
+    postLogin(req, res, next) {
+        passport.authenticate('local', { 
+            successRedirect: '/',
+            failureRedirect: '/login'
+      })(req, res, next);
+    },
+    getLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.register(newUser, req.body.password);
+        res.redirect('/');
+    },
+    postLogin(req, res, next) {
+        passport.authenticate('local', { 
+            successRedirect: '/',
+            failureRedirect: '/login'
+      })(req, res, next);
+    },
+    getLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.register(newUser, req.body.password);
+        res.redirect('/');
+    },
+    postLogin(req, res, next) {
+        passport.authenticate('local', { 
+            successRedirect: '/',
+            failureRedirect: '/login'
+      })(req, res, next);
+    },
+    getLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.register(newUser, req.body.password);
+        res.redirect('/');
+    },
+    postLogin(req, res, next) {
+        passport.authenticate('local', { 
+            successRedirect: '/',
+            failureRedirect: '/login'
+      })(req, res, next);
+    },
+    getLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.register(newUser, req.body.password);
+        res.redirect('/');
+    },
+    postLogin(req, res, next) {
+        passport.authenticate('local', { 
+            successRedirect: '/',
+            failureRedirect: '/login'
+      })(req, res, next);
+    },
+    getLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.register(newUser, req.body.password);
+        res.redirect('/');
+    },
+    postLogin(req, res, next) {
+        passport.authenticate('local', { 
+            successRedirect: '/',
+            failureRedirect: '/login'
+      })(req, res, next);
+    },
+    getLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.register(newUser, req.body.password);
+        res.redirect('/');
+    },
+    postLogin(req, res, next) {
+        passport.authenticate('local', { 
+            successRedirect: '/',
+            failureRedirect: '/login'
+      })(req, res, next);
+    },
+    getLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.register(newUser, req.body.password);
+        res.redirect('/');
+    },
+    postLogin(req, res, next) {
+        passport.authenticate('local', { 
+            successRedirect: '/',
+            failureRedirect: '/login'
+      })(req, res, next);
+    },
+    getLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');
+    
 } */
