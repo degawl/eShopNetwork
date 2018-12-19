@@ -27,6 +27,93 @@ module.exports = {
 
         NB!!!!!SIIT TULEB TRASH
     },
+
+
+    tLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.registtLogout(req, res, next) {
+            req.logout();
+            res.redirect('/');});
+        await User.regist
     postLogin(req, res, next) {
         passport.authenticate('local', { 
             successRedirect: '/',
