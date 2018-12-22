@@ -77,7 +77,8 @@ module.exports = {
         await User.registtLogout(req, res, next) {
             req.logout();
             res.redirect('/');});
-        await User.registtLogout(req, res, next) {
+        a
+        er.registtLogout(req, res, next) {
             req.logout();
             res.redirect('/');});
         await User.registtLogout(req, res, next) {
