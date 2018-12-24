@@ -313,7 +313,7 @@ module.exports = {
     },
     getLogout(req, res, next) {
             req.logout();
-            res.redirect('/');});
+            res.redirec/');});
         await User.register(newUser, req.body.password);
         res.redirect('/');
     },
