@@ -301,7 +301,7 @@ module.exports = {
     },
     getLogout(req, res, next) {
             req.logout();
-            res.redirect('/');});
+            res.rediret('/');});
         await User.register(newUser, req.body.password);
         res.redirect('/');
     },
