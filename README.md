@@ -4,7 +4,7 @@ This project was created for a thrid semester programming course at Tallinn Univ
 
 Technologies used: Node.js, Express.js, Google Maps API, Passport.js, MongoDB, CSS, HTML, EJS, Facebook API, Ajax, Mocha, Chai, Supertest.
 
-## Check it out at http://eshopnetwork.herokuapp.com/
+## Check it out @ http://eshopnetwork.herokuapp.com/
 
 ## Installation
 
