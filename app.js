@@ -15,8 +15,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const methodOverride = require('method-override');
 const engine = require('ejs-mate');
 const User = require('./models/user');
-const configAuth = require('./config/auth'); // is this needed?
-//const seedDB = require('./seeds');
+const configAuth = require('./config/auth');
+
 
 const index 		= require('./routes/index');
 const posts 		= require('./routes/posts');
@@ -33,9 +33,6 @@ const databaseUri = (process.env.DATABASE_URI);
 mongoose.connect(databaseUri, { useNewUrlParser: true })
       .then(() => console.log(`Database connected`))
       .catch(err => console.log(`Database connection error: ${err.message}`));
-
-// Seed the database
-//seedDB();
 
 // view engine and layout-templates setup
 app.engine('ejs', engine);
