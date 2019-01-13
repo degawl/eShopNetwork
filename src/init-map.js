@@ -94,7 +94,7 @@ const formSubmit = event => {
 			  .done(paintDom)
 	  		.fail(handleError);
 	} else if (location) {
-			// select the 25mi range if none already checked
+			// select the 25km range if none already checked
 			if(!($('#distance1').is(':checked') || $('#distance2').is(':checked') || $('#distance3').is(':checked'))) {
 				$('#distance1').prop('checked', true);
 			}
@@ -132,7 +132,7 @@ const formSubmit = event => {
 	}
 };
 
-function pageBtnClick(event) { // can't get this to work with event.target instead of this???
+function pageBtnClick(event) { 
 	// prevent form from submitting
 	event.preventDefault();
 	// pull url from link href
@@ -257,7 +257,7 @@ const getLocation = event => {
 		return;
 	}
 	event.target.innerText = 'turn off my location';
-	// toggle distance options and select 25mi by default
+	// toggle distance options and select 25km by default
 	$('#distance').slideDown('slow');
 	$('#distance1').prop('checked', true);
 	// clear location field in filter form
@@ -322,7 +322,6 @@ const loadMarkers = posts => {
 	  let latLng = new google.maps.LatLng(posts[i].coordinates[1], posts[i].coordinates[0]);
 	  let marker = new google.maps.Marker({
       position: latLng,
-      // label: posts[i].title, // Removed this for now! Either remove completely or add back in later
       animation: google.maps.Animation.DROP,
       url: '/posts/' + posts[i]._id
     });
