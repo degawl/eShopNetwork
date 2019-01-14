@@ -174,7 +174,7 @@ var formSubmit = function formSubmit(event) {
 			formData: formData
 		}).done(paintDom).fail(handleError);
 	} else if (location) {
-		// select the 25mi range if none already checked
+		// select the 25km range if none already checked
 		if (!($('#distance1').is(':checked') || $('#distance2').is(':checked') || $('#distance3').is(':checked'))) {
 			$('#distance1').prop('checked', true);
 		}
@@ -209,7 +209,6 @@ var formSubmit = function formSubmit(event) {
 };
 
 function pageBtnClick(event) {
-	// can't get this to work with event.target instead of this???
 	// prevent form from submitting
 	event.preventDefault();
 	// pull url from link href
@@ -235,7 +234,7 @@ var paintDom = function paintDom(data) {
 	$('#posts-row').html('');
 	// loop over posts and append each to DOM
 	data.posts.forEach(function (post) {
-		$('#posts-row').append('\n\t\t\t<div class="col-lg-4 col-md-6 mb-4">\n\t\t\t  <div class="card h-100 shadow">\n\t\t\t    <a href="/posts/' + post._id + '"><img class="card-img-top" src="' + post.image + '" alt="' + post.title + '"></a>\n\t\t\t    <div class="card-body">\n\t\t\t      <h4 class="card-title">\n\t\t\t        <a href="/posts/' + post._id + '">' + post.title + '</a>\n\t\t\t      </h4>\n\t\t\t      <h5>$' + post.price + '.00</h5>\n\t\t\t      <p class="card-text">' + post.description.substring(0, 20) + (post.description.length > 20 ? '...' : '') + '</p>\n\t\t\t      <a href="/posts/' + post._id + '" class="btn btn-primary">View Board</a>\n\t\t\t    </div>\n\t\t\t    <div class="card-footer">\n\t\t\t\t    <small class="text-muted float-left">' + post.category + '</small>\n\t\t\t      <small class="text-muted float-right">' + post.condition + '</small>\n\t\t\t    </div>\n\t\t\t  </div>\n\t\t\t</div>\n\t\t');
+		$('#posts-row').append('\n\t\t\t<div class="col-lg-4 col-md-6 mb-4">\n\t\t\t  <div class="card h-100">\n\t\t\t    <a href="/posts/' + post._id + '"><img class="card-img-top" src="' + post.image + '" alt="' + post.title + '"></a>\n\t\t\t    <div class="card-body">\n\t\t\t      <h4 class="card-title">\n\t\t\t        <a href="/posts/' + post._id + '">' + post.title + '</a>\n\t\t\t      </h4>\n\t\t\t      <h5>$' + post.price + '.00</h5>\n\t\t\t      <p class="card-text">' + post.description.substring(0, 20) + (post.description.length > 20 ? '...' : '') + '</p>\n\t\t\t      <a href="/posts/' + post._id + '" class="btn btn-primary">View Board</a>\n\t\t\t    </div>\n\t\t\t    <div class="card-footer">\n\t\t\t\t    <small class="text-muted float-left">' + post.category + '</small>\n\t\t\t      <small class="text-muted float-right">' + post.condition + '</small>\n\t\t\t    </div>\n\t\t\t  </div>\n\t\t\t</div>\n\t\t');
 	});
 	// clear the current page numbers
 	$('ul.pagination').html('');
@@ -302,7 +301,7 @@ var getLocation = function getLocation(event) {
 		return;
 	}
 	event.target.innerText = 'turn off my location';
-	// toggle distance options and select 25mi by default
+	// toggle distance options and select 25km by default
 	$('#distance').slideDown('slow');
 	$('#distance1').prop('checked', true);
 	// clear location field in filter form
@@ -311,11 +310,7 @@ var getLocation = function getLocation(event) {
 	$('#loader').show();
 
 	infoWindow = new google.maps.InfoWindow();
-	// Try HTML5 geolocation.
-	// Note: This example requires that you consent to location sharing when
-	// prompted by your browser. If you see the error "The Geolocation service
-	// failed.", it means you probably did not give permission for the browser to
-	// locate you.
+
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function (position) {
 			userLocation = {
@@ -362,7 +357,6 @@ var loadMarkers = function loadMarkers(posts) {
 		var latLng = new google.maps.LatLng(posts[i].coordinates[1], posts[i].coordinates[0]);
 		var marker = new google.maps.Marker({
 			position: latLng,
-			// label: posts[i].title, // Removed this for now! Either remove completely or add back in later
 			animation: google.maps.Animation.DROP,
 			url: '/posts/' + posts[i]._id
 		});

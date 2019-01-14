@@ -66,7 +66,7 @@ const initMapShow = () => {
       position: center,
       map: map
   });
-  marker.addListener('mouseover', () => {
+  marker.addListener('click', () => {
     infowindow.open(map, marker);
   });
 }
@@ -324,8 +324,7 @@ const loadMarkers = posts => {
     });
     google.maps.event.addListener(marker, 'click', function() {
         window.location.href = this.url;
-		});
-		
+    });
 	  markers.push(marker);
 	  bounds.extend(markers[i].getPosition());
 	}
