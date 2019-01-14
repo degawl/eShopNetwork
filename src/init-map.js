@@ -9,6 +9,7 @@ const initMapIndex = () => {
 		center: new google.maps.LatLng(37.773972, -122.431297),
 		mapTypeId: 'terrain'
 	});
+	
 
 	if (!window.location.search && !posts) {
 			$.get('/posts').done(data => {
@@ -65,7 +66,7 @@ const initMapShow = () => {
       position: center,
       map: map
   });
-  marker.addListener('click', () => {
+  marker.addListener('mouseover', () => {
     infowindow.open(map, marker);
   });
 }
@@ -266,11 +267,7 @@ const getLocation = event => {
 	$('#loader').show();
 
 	infoWindow = new google.maps.InfoWindow;
-  // Try HTML5 geolocation.
-	// Note: This example requires that you consent to location sharing when
-	// prompted by your browser. If you see the error "The Geolocation service
-	// failed.", it means you probably did not give permission for the browser to
-	// locate you.
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(position => {
       userLocation = {
@@ -327,7 +324,8 @@ const loadMarkers = posts => {
     });
     google.maps.event.addListener(marker, 'click', function() {
         window.location.href = this.url;
-    });
+		});
+		
 	  markers.push(marker);
 	  bounds.extend(markers[i].getPosition());
 	}
