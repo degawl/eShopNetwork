@@ -157,7 +157,7 @@ const paintDom = data => {
 	data.posts.forEach(post => {
 		$('#posts-row').append(`
 			<div class="col-lg-4 col-md-6 mb-4">
-			  <div class="card h-100">
+			  <div class="card h-100 shadow">
 			    <a href="/posts/${ post._id }"><img class="card-img-top" src="${ post.image }" alt="${ post.title }"></a>
 			    <div class="card-body">
 			      <h4 class="card-title">
@@ -165,7 +165,7 @@ const paintDom = data => {
 			      </h4>
 			      <h5>$${ post.price }.00</h5>
 			      <p class="card-text">${ post.description.substring(0, 20) }${ post.description.length > 20 ? '...' : '' }</p>
-			      <a href="/posts/${ post._id }" class="btn btn-primary">View Board</a>
+			      <a href="/posts/${ post._id }" class="btn btn-outline-primary">View Post</a>
 			    </div>
 			    <div class="card-footer">
 				    <small class="text-muted float-left">${ post.category }</small>
