@@ -271,3 +271,78 @@ describe('Test Post Comments testing', function () {
         assert.isArray(testPost.comments);
     });
 });
+
+describe('Test Post author testing', function () {
+    it('Should test the author of Test Post data type', function () {
+        assert.equal(testPost.author.length, 5);
+    });
+    it('Should test the author of Test Post data type', function () {
+        assert.equal(testPost.author, 'Devon');
+    });
+    it('Should test the author of Test Post datatype', function () {
+        assert.isString(testPost.author);
+    });
+    it('Should test the author of Test Post datatype', function () {
+        assert.isNotNull(testPost.author);
+    });
+    it('Should test the author of Test Post datatype', function () {
+        assert.isNotArray(testPost.author);
+    });
+    it('Should test the author of Test Post datatype', function () {
+        assert.isNotBoolean(testPost.author);
+    });
+    it('Should test the author of Test Post datatype', function () {
+        assert.isNotArray(testPost.author);
+    });
+    it('Should test the author of Test Post datatype', function () {
+        assert.isNotBoolean(testPost.author);
+    });
+    it('Should test the author of Test Post datatype', function () {
+        assert.isNotNaN(testPost.author);
+    });
+    it('Should test the author of Test Post datatype', function () {
+        assert.isNotNull(testPost.author);
+    });
+    it('Should test the author of Test Post datatype', function () {
+        assert.isNotArray(testPost.author);
+    });
+    it('Should test the author of Test Post datatype', function () {
+        assert.isNotNaN(testPost.author);
+    });
+});
+
+describe('Test Post createdAt testing', function () {
+    it('Should test the createdAt of Test Post data type', function () {
+        assert.equal(testPost.createdAt, Date.now);
+    });
+    it('Should test the createdAt of Test Post datatype', function () {
+        assert.isNotString(testPost.createdAt);
+    });
+    it('Should test the createdAt of Test Post datatype', function () {
+        assert.isNotNull(testPost.createdAt);
+    });
+    it('Should test the createdAt of Test Post datatype', function () {
+        assert.isNotArray(testPost.createdAt);
+    });
+    it('Should test the createdAt of Test Post datatype', function () {
+        assert.isNotBoolean(testPost.createdAt);
+    });
+    it('Should test the createdAt of Test Post datatype', function () {
+        assert.isNotArray(testPost.createdAt);
+    });
+    it('Should test the createdAt of Test Post datatype', function () {
+        assert.isNotBoolean(testPost.createdAt);
+    });
+    it('Should test the createdAt of Test Post datatype', function () {
+        assert.isNotNaN(testPost.createdAt);
+    });
+    it('Should test the createdAt of Test Post datatype', function () {
+        assert.isNotNull(testPost.createdAt);
+    });
+    it('Should test the createdAt of Test Post datatype', function () {
+        assert.isNotArray(testPost.createdAt);
+    });
+    it('Should test the createdAt of Test Post datatype', function () {
+        assert.isNotNaN(testPost.createdAt);
+    });
+});
