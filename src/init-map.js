@@ -1,5 +1,4 @@
 let map, infoWindow, geocoder, markerCluster, latLngQuery, userLocation;
-// store clean form for comparison later in paintDom
 const cleanForm = $('#post-filter-form').serialize();
 
 const initMapIndex = () => {
@@ -13,20 +12,15 @@ const initMapIndex = () => {
 
 	if (!window.location.search && !posts) {
 			$.get('/posts').done(data => {
-				// load all post markers
 				loadMarkers(data.posts);
 			});
 	} else {
 			loadMarkers(posts);
 	}
 
-	// listen for submit event on post filter form from /posts index
 	$('#post-filter-form').on('submit', formSubmit);
-	// add click listener for any pagination button clicks and submit query
 	$('ul.pagination').on('click', '.page-link', pageBtnClick);
-	// get user location on link click from filter form
 	$('#use-my-location').on('click', getLocation);
-	// listen for change on location and toggle distance
 	$('#input-location').on('input', toggleDistance);
 }
 
@@ -66,7 +60,7 @@ const initMapShow = () => {
       position: center,
       map: map
   });
-  marker.addListener('mouseover', () => {
+  marker.addListener('click', () => {
     infowindow.open(map, marker);
   });
 }
@@ -163,7 +157,7 @@ const paintDom = data => {
 	data.posts.forEach(post => {
 		$('#posts-row').append(`
 			<div class="col-lg-4 col-md-6 mb-4">
-			  <div class="card h-100">
+			  <div class="card h-100 shadow">
 			    <a href="/posts/${ post._id }"><img class="card-img-top" src="${ post.image }" alt="${ post.title }"></a>
 			    <div class="card-body">
 			      <h4 class="card-title">
@@ -171,7 +165,7 @@ const paintDom = data => {
 			      </h4>
 			      <h5>$${ post.price }.00</h5>
 			      <p class="card-text">${ post.description.substring(0, 20) }${ post.description.length > 20 ? '...' : '' }</p>
-			      <a href="/posts/${ post._id }" class="btn btn-primary">View Board</a>
+			      <a href="/posts/${ post._id }" class="btn btn-outline-primary">View Post</a>
 			    </div>
 			    <div class="card-footer">
 				    <small class="text-muted float-left">${ post.category }</small>
@@ -324,8 +318,7 @@ const loadMarkers = posts => {
     });
     google.maps.event.addListener(marker, 'click', function() {
         window.location.href = this.url;
-		});
-		
+    });
 	  markers.push(marker);
 	  bounds.extend(markers[i].getPosition());
 	}

@@ -24,12 +24,8 @@ const comments  = require('./routes/comments');
 
 const app = express();
 
-// assign mongoose promise library and connect to database
 mongoose.Promise = global.Promise;
-//process.env.DATABASE_URI || 
 const databaseUri = (process.env.DATABASE_URI);
-//'mongodb://localhost:27017/eshop-network-mapbox'
-//'mongodb://localhost:27017/eshop-network-mapbox'
 mongoose.connect(databaseUri, { useNewUrlParser: true })
       .then(() => console.log(`Database connected`))
       .catch(err => console.log(`Database connection error: ${err.message}`));
@@ -39,8 +35,6 @@ app.engine('ejs', engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -49,7 +43,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressSanitizer());
 app.use(methodOverride('_method'));
 app.use(flash());
-//require moment
 app.locals.moment = require('moment');
 
 // PASSPORT CONFIGURATION
