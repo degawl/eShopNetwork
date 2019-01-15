@@ -10,8 +10,8 @@
         <li class="nav-item <%= page === 'posts' ? 'active' : '' %>">
           <a class="nav-link" href="/posts">All Posts <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item <%= page == 'posts/new' ? 'active' : '' %>">
-          <a class="nav-link" href="/posts/new">New Post <span class="sr-only">(current)</span></a>
+        <li class="nav-item <%= page === 'posts/new' ? 'active' : '' %>">
+          <a class="nav-link" href="/posts/new">Create Post <span class="sr-only">(current)</span></a>
         </li>
       </ul>
       <form action="/posts" method="GET" class="form-inline mt-2 mt-md-0">

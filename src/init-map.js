@@ -8,7 +8,6 @@ const initMapIndex = () => {
 		center: new google.maps.LatLng(37.773972, -122.431297),
 		mapTypeId: 'terrain'
 	});
-	
 
 	if (!window.location.search && !posts) {
 			$.get('/posts').done(data => {
