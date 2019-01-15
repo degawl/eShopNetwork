@@ -86,7 +86,6 @@ var map = void 0,
     markerCluster = void 0,
     latLngQuery = void 0,
     userLocation = void 0;
-// store clean form for comparison later in paintDom
 var cleanForm = $('#post-filter-form').serialize();
 
 var initMapIndex = function initMapIndex() {
@@ -99,20 +98,15 @@ var initMapIndex = function initMapIndex() {
 
 	if (!window.location.search && !posts) {
 		$.get('/posts').done(function (data) {
-			// load all post markers
 			loadMarkers(data.posts);
 		});
 	} else {
 		loadMarkers(posts);
 	}
 
-	// listen for submit event on post filter form from /posts index
 	$('#post-filter-form').on('submit', formSubmit);
-	// add click listener for any pagination button clicks and submit query
 	$('ul.pagination').on('click', '.page-link', pageBtnClick);
-	// get user location on link click from filter form
 	$('#use-my-location').on('click', getLocation);
-	// listen for change on location and toggle distance
 	$('#input-location').on('input', toggleDistance);
 };
 

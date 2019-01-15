@@ -9,12 +9,9 @@ module.exports = {
 		const escapeRegex = (text) => {
 		    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 		};
-		// check if filters exist
 		if (req.query.post) filters = Object.values(req.query.post).join('') ? true : false;
-		// check if request has filter(s)
 		if (filters) {
 				let { search, condition, category, price, location, longitude, latitude  } = req.query.post;
-				// build $and query array
 				query = [];
 				if (search) {
 					search = new RegExp(escapeRegex(search), 'gi');
@@ -31,7 +28,7 @@ module.exports = {
 					query.push({ condition: new RegExp(condition, 'gi') });
 				}
 				if (category) {
-					res.locals.category = category; // make category available in view
+					res.locals.category = category;
 					if (Array.isArray(category)) category = '(' + category.join('?|') + '?)';
 					query.push({ category: new RegExp(category, 'gi') });
 				}
@@ -40,11 +37,8 @@ module.exports = {
 					if (price.max) query.push({ price: { $lte: price.max } });
 				}
 				if (longitude && latitude) {
-					// get the max distance or set it to 25 mi
 					let maxDistance = req.query.post.distance || 25;
-					// we need to convert the distance to degrees, one degree is approximately 69 miles
 					maxDistance /= 69;
-					// get coordinates [ <longitude> , <latitude> ]
 					let coords = [
 						longitude,
 						latitude
@@ -62,7 +56,6 @@ module.exports = {
 		posts = await Post.paginate(query, { page: req.query.page, limit: req.query.limit, sort: { '_id': -1 } });
 
 		if(req.xhr) {
-				// send back json with status of 200 (OK)
 				res.status(200).json({
 					posts: posts.docs,
 					pageNumber: posts.page, 
@@ -73,7 +66,6 @@ module.exports = {
 					prevUrl: paginate.href(req)(true)
 				});
 		} else {		
-				// render index view
 			  res.render('posts/index', { 
 					title: 'Posts Index', 
 					page: 'posts', 
