@@ -37,7 +37,7 @@
     "formidable": "^1.2.1",
     "geocoder": "^0.2.3",
     "hoek": "^6.0.3",
-    "https-proxy-agent": ">=2.2.0",
+    "https-proxy-agent": ">=2.2.3",
     "locus": "^2.0.1",
     "lodash": ">=4.17.5",
     "mailgun-js": "^0.22.0",
