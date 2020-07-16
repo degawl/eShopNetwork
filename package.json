@@ -39,7 +39,7 @@
     "hoek": "^6.0.3",
     "https-proxy-agent": ">=2.2.0",
     "locus": "^2.0.1",
-    "lodash": ">=4.17.5",
+    "lodash": ">=4.17.19",
     "mailgun-js": "^0.22.0",
     "method-override": "^2.3.10",
     "mime": ">=1.4.1",
