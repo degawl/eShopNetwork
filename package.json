@@ -16,7 +16,7 @@
     ]
   },
   "dependencies": {
-    "ajv": "^6.5.5",
+    "ajv": "^6.12.3",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
